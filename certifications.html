@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications - Layann Wardeh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f4c75;
+            --highlight-color: #3282b8;
+            --text-light: #bbe1fa;
+            --text-white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0f4c75 100%);
+            --gradient-2: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            
+            /* Typography System */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: #0a0a0a;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-white);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-white);
+        }
+
+        .nav-links a.active {
+            color: var(--highlight-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-1);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Certification Categories */
+        .cert-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: var(--text-white);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(50, 130, 184, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            background: var(--gradient-2);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+
+        /* Certification Grid */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: rgba(22, 33, 62, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(50, 130, 184, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--highlight-color);
+            box-shadow: 0 10px 30px rgba(50, 130, 184, 0.3);
+        }
+
+        .cert-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .cert-title h3 {
+            font-size: 1.4rem;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-title p {
+            color: var(--highlight-color);
+            font-size: 1.1rem;
+        }
+
+        .cert-status {
+            background: rgba(50, 130, 184, 0.2);
+            color: var(--highlight-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(50, 130, 184, 0.4);
+        }
+
+        .cert-status.completed {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border-color: rgba(76, 175, 80, 0.4);
+        }
+
+        .cert-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-details p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cert-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(50, 130, 184, 0.1);
+            color: var(--text-light);
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(50, 130, 184, 0.2);
+        }
+
+        .cert-action {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: var(--text-white);
+            box-shadow: 0 4px 15px rgba(50, 130, 184, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(50, 130, 184, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid rgba(50, 130, 184, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(50, 130, 184, 0.1);
+            border-color: var(--highlight-color);
+        }
+
+        /* Upcoming Section */
+        .upcoming-section {
+            background: rgba(22, 33, 62, 0.2);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .upcoming-section h2 {
+            font-size: 2rem;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+
+        .upcoming-list {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            text-align: left;
+        }
+
+        .upcoming-item {
+            background: rgba(50, 130, 184, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(50, 130, 184, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-action {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Layann Wardeh</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="certifications.html" class="active">Certifications</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Certifications & Learning</h1>
+        <p>Continuous learning journey in technology, business, and leadership</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Technical Certifications -->
+        <section class="cert-category">
+            <h2 class="category-title">
+                <div class="category-icon">💻</div>
+                Technical Certifications
+            </h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>AWS Cloud Practitioner</h3>
+                            <p>Amazon Web Services</p>
+                        </div>
+                        <span class="cert-status">In Progress</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Expected: March 2025</p>
+                        <p>📚 Foundational cloud computing knowledge</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Cloud Computing</span>
+                        <span class="skill-tag">AWS Services</span>
+                        <span class="skill-tag">Architecture</span>
+                        <span class="skill-tag">Security</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-primary">View Progress</a>
+                        <a href="#" class="btn btn-secondary">Study Plan</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>Python for Data Science</h3>
+                            <p>Coursera - IBM</p>
+                        </div>
+                        <span class="cert-status completed">Completed</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Completed: January 2024</p>
+                        <p>🏆 Grade: 95%</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Pandas</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-primary">View Certificate</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>Machine Learning Fundamentals</h3>
+                            <p>Stanford Online</p>
+                        </div>
+                        <span class="cert-status">In Progress</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Expected: May 2025</p>
+                        <p>📊 Progress: 60%</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Neural Networks</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Algorithms</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-primary">Course Portal</a>
+                        <a href="#" class="btn btn-secondary">View Syllabus</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business & Strategy Certifications -->
+        <section class="cert-category">
+            <h2 class="category-title">
+                <div class="category-icon">📊</div>
+                Business & Strategy
+            </h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>Management Consulting Specialization</h3>
+                            <p>University of Illinois - Coursera</p>
+                        </div>
+                        <span class="cert-status">In Progress</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Expected: April 2025</p>
+                        <p>📊 4-course specialization</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Strategy</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Client Management</span>
+                        <span class="skill-tag">Analytics</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-primary">View Progress</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>Financial Modeling</h3>
+                            <p>Wall Street Prep</p>
+                        </div>
+                        <span class="cert-status">Planned</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Start: Summer 2025</p>
+                        <p>💡 Excel-based financial analysis</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">Financial Analysis</span>
+                        <span class="skill-tag">Valuation</span>
+                        <span class="skill-tag">DCF Modeling</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>Agile Project Management</h3>
+                            <p>Google Career Certificates</p>
+                        </div>
+                        <span class="cert-status completed">Completed</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Completed: September 2024</p>
+                        <p>🏆 Professional Certificate</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Team Leadership</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-primary">View Certificate</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership & Soft Skills -->
+        <section class="cert-category">
+            <h2 class="category-title">
+                <div class="category-icon">🌟</div>
+                Leadership & Development
+            </h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>Leadership Excellence Program</h3>
+                            <p>Notre Dame Student Leadership</p>
+                        </div>
+                        <span class="cert-status completed">Completed</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Completed: May 2024</p>
+                        <p>🎯 Intensive leadership development</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Team Leadership</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Conflict Resolution</span>
+                        <span class="skill-tag">Strategic Planning</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">
+                            <h3>Cross-Cultural Communication</h3>
+                            <p>Center for Social Concerns</p>
+                        </div>
+                        <span class="cert-status completed">Completed</span>
+                    </div>
+                    <div class="cert-details">
+                        <p>📅 Completed: June 2024</p>
+                        <p>🌍 Pre-departure training for Uganda</p>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Cultural Intelligence</span>
+                        <span class="skill-tag">Global Mindset</span>
+                        <span class="skill-tag">Adaptability</span>
+                        <span class="skill-tag">Empathy</span>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn btn-primary">Certificate</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Learning Goals -->
+        <section class="upcoming-section">
+            <h2>2025 Learning Roadmap</h2>
+            <p>Focused on building expertise for technology consulting</p>
+            <div class="upcoming-list">
+                <div class="upcoming-item">
+                    <span>🎯 AWS Solutions Architect Associate</span>
+                    <span>Q3 2025</span>
+                </div>
+                <div class="upcoming-item">
+                    <span>🎯 McKinsey Forward Program</span>
+                    <span>Q2 2025</span>
+                </div>
+                <div class="upcoming-item">
+                    <span>🎯 Tableau Data Visualization</span>
+                    <span>Summer 2025</span>
+                </div>
+                <div class="upcoming-item">
+                    <span>🎯 Case Interview Preparation</span>
+                    <span>Fall 2025</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.cert-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Smooth hover effect for category titles
+        document.querySelectorAll('.category-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.transform = 'rotate(10deg) scale(1.1)';
+            });
+            icon.addEventListener('mouseleave', function() {
+                this.style.transform = 'rotate(0) scale(1)';
+            });
+            icon.style.transition = 'transform 0.3s ease';
+        });
+    </script>
+</body>
+</html>

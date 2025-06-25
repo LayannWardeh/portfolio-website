@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Engineering & Business</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f4c75;
+            --highlight-color: #3282b8;
+            --text-light: #bbe1fa;
+            --text-white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0f4c75 100%);
+            --gradient-2: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            
+            /* Typography System */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: #0a0a0a;
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 400;
+            letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: -0.02em;
+        }
+
+        .logo:hover {
+            color: var(--highlight-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-white);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-1);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(50, 130, 184, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(15, 76, 117, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(50, 130, 184, 0.2) 0%, transparent 50%);
+            animation: pulse 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            font-family: var(--font-heading);
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--highlight-color);
+            font-weight: 600;
+            font-family: var(--font-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: var(--font-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: var(--text-white);
+            box-shadow: 0 4px 15px rgba(50, 130, 184, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(50, 130, 184, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--highlight-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--highlight-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            font-family: var(--font-heading);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-white);
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-2);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: #0f0f0f;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--highlight-color);
+            font-size: 2rem;
+            font-family: var(--font-heading);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: rgba(50, 130, 184, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(50, 130, 184, 0.3);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .skill-item strong {
+            font-weight: 600;
+            color: var(--text-white);
+            display: block;
+            margin-bottom: 0.3rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            background: rgba(50, 130, 184, 0.2);
+            border-color: var(--highlight-color);
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--primary-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(22, 33, 62, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(50, 130, 184, 0.2);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(50, 130, 184, 0.3);
+            border-color: var(--highlight-color);
+        }
+
+        .project-image {
+            height: 200px;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-white);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            color: var(--text-white);
+            font-size: 1.5rem;
+            font-family: var(--font-heading);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: rgba(50, 130, 184, 0.2);
+            color: var(--highlight-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+            border: 1px solid rgba(50, 130, 184, 0.4);
+            letter-spacing: 0.02em;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: #0f0f0f;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gradient-2);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-content {
+            background: rgba(22, 33, 62, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            width: calc(50% - 40px);
+            position: relative;
+            border: 1px solid rgba(50, 130, 184, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+            border-color: var(--highlight-color);
+            box-shadow: 0 5px 20px rgba(50, 130, 184, 0.3);
+        }
+
+        .timeline-content h3 {
+            color: var(--text-white);
+            font-size: 1.4rem;
+            font-family: var(--font-heading);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .timeline-content h4 {
+            color: var(--highlight-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-family: var(--font-primary);
+        }
+
+        .timeline-date {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            font-family: var(--font-mono);
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--gradient-1);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .contact-link:hover {
+            color: var(--text-white);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(50, 130, 184, 0.2);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Layann Wardeh</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Layann Wardeh</h1>
+            <p class="tagline">Transforming Business Through Technology</p>
+            <p>Senior at Notre Dame studying Computer Engineering with a minor in Engineering Corporate Practice, passionate about leveraging cutting-edge technology to drive strategic innovation and create impactful business solutions.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Engineering Tomorrow's Solutions</h3>
+                    <p>I'm a Computer Engineering senior at the University of Notre Dame with a unique perspective that combines deep technical expertise with strategic business thinking. My minor in Engineering Corporate Practice and diverse experiences from Uganda to Jordan have shaped my approach to technology as a catalyst for meaningful change.</p>
+                    <p>My goal is to pursue a career in technology consulting where I can leverage my technical skills and business acumen to help organizations solve complex challenges, optimize operations, and unlock new opportunities through innovative technology solutions.</p>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <strong>Languages:</strong> Python, C, Java, MATLAB, Shell Scripting
+                        </div>
+                        <div class="skill-item">
+                            <strong>Technologies:</strong> OpenCV, RISC-V, Cadence, SolidWorks
+                        </div>
+                        <div class="skill-item">
+                            <strong>Business:</strong> Data Analysis, Market Research, Financial Modeling
+                        </div>
+                        <div class="skill-item">
+                            <strong>Tools:</strong> Excel, PowerPoint, Visme, Visio
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <!-- Add your professional photo here -->
+                    <div style="background: var(--gradient-2); height: 400px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                        Your Photo
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="experience.html" class="btn btn-secondary">View Full Experience Timeline →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">📁</div>
+                    <div class="project-content">
+                        <h3>Directory Watch Tool</h3>
+                        <p>Built a robust system monitoring tool in C that continuously tracks directory contents with real-time updates and comprehensive error handling.</p>
+                        <div class="project-tags">
+                            <span class="tag">C Programming</span>
+                            <span class="tag">System Calls</span>
+                            <span class="tag">Unix/Linux</span>
+                            <span class="tag">Error Handling</span>
+                        </div>
+                        <a href="projects.html#dirwatch" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">💼</div>
+                    <div class="project-content">
+                        <h3>Capsim Business Simulation</h3>
+                        <p>Leading strategic decision-making in competitive business simulation, optimizing product development and market positioning through data-driven insights.</p>
+                        <div class="project-tags">
+                            <span class="tag">Strategy</span>
+                            <span class="tag">Data Analysis</span>
+                            <span class="tag">Financial Modeling</span>
+                        </div>
+                        <a href="projects.html#capsim" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">⚙️</div>
+                    <div class="project-content">
+                        <h3>Multi-Core Process Scheduler</h3>
+                        <p>Developed advanced process queue shell in C, implementing FIFO and Round Robin algorithms for optimal CPU core utilization and performance.</p>
+                        <div class="project-tags">
+                            <span class="tag">C Programming</span>
+                            <span class="tag">Operating Systems</span>
+                            <span class="tag">Algorithms</span>
+                        </div>
+                        <a href="projects.html#scheduler" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="projects.html" class="btn btn-secondary">View All Projects →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Teaching Assistant</h3>
+                        <h4>Notre Dame Engineering Department</h4>
+                        <p class="timeline-date">August 2024 - Present</p>
+                        <p>Support Computer Architecture & Logic Design courses, tutoring students in advanced topics including pipeline processing, cache memory, and instruction set architectures. Guide students through complex assignments and provide personalized academic support.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Summer Fellowship Fellow</h3>
+                        <h4>Notre Dame Center for Social Concerns - Uganda</h4>
+                        <p class="timeline-date">June 2024 - August 2024</p>
+                        <p>Conducted research on STEM education methodologies in under-resourced communities. Facilitated mathematics and ICT lessons, integrating innovative strategies to enhance accessibility and student engagement in technology.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Data Analysis & Computer Vision Intern</h3>
+                        <h4>Nafith Logistics International - Jordan</h4>
+                        <p class="timeline-date">June 2023</p>
+                        <p>Implemented computer vision solutions using Python and OpenCV for moving object detection. Cleansed 6-month datasets and developed comprehensive workflow visualizations to optimize logistics processes.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>President & Captain</h3>
+                        <h4>Baraka Bouts Women's Boxing Club</h4>
+                        <p class="timeline-date">September 2022 - Present</p>
+                        <p>Lead 70+ athletes while spearheading the annual tournament that raises $100,000+ for education in Uganda. Demonstrate strategic planning, team management, and the ability to drive results in high-pressure environments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-content">
+                <p>I'm always interested in discussing new opportunities, innovative projects, or how technology can drive business value. Feel free to reach out!</p>
+                <div class="contact-links">
+                    <a href="mailto:lwardeh@nd.edu" class="contact-link">
+                        <span>📧</span> Email
+                    </a>
+                    <a href="https://www.linkedin.com/in/layann-wardeh524" class="contact-link">
+                        <span>💼</span> LinkedIn
+                    </a>
+                    <a href="tel:574-378-5952" class="contact-link">
+                        <span>📱</span> Phone
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Layann Wardeh. Transforming Business Through Technology.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

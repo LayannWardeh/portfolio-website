@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Layann Wardeh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f4c75;
+            --highlight-color: #3282b8;
+            --text-light: #bbe1fa;
+            --text-white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0f4c75 100%);
+            --gradient-2: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            
+            /* Typography System */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: #0a0a0a;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-white);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-white);
+        }
+
+        .nav-links a.active {
+            color: var(--highlight-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-1);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-2);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 100px;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 42px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: var(--highlight-color);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 6px var(--highlight-color);
+        }
+
+        .experience-card {
+            background: rgba(22, 33, 62, 0.3);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(50, 130, 184, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateX(5px);
+            border-color: var(--highlight-color);
+            box-shadow: 0 5px 20px rgba(50, 130, 184, 0.3);
+        }
+
+        .experience-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-header h3 {
+            font-size: 1.3rem;
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .experience-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .experience-highlights h4 {
+            color: var(--highlight-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-highlights ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .experience-highlights li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .experience-highlights li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--highlight-color);
+            font-size: 1.2rem;
+        }
+
+        .skills-gained {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(50, 130, 184, 0.2);
+            color: var(--highlight-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(50, 130, 184, 0.4);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(22, 33, 62, 0.3);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 12px;
+            }
+
+            .experience-card {
+                padding: 1.5rem;
+            }
+
+            .experience-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Layann Wardeh</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="experience.html" class="active">Experience</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Professional Experience</h1>
+        <p>A journey of continuous learning, leadership, and impact across technology and business domains</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Stats Overview -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>4+</h3>
+                    <p>Years of Leadership</p>
+                </div>
+                <div class="stat-item">
+                    <h3>3</h3>
+                    <p>Countries Worked In</p>
+                </div>
+                <div class="stat-item">
+                    <h3>70+</h3>
+                    <p>Athletes Led</p>
+                </div>
+                <div class="stat-item">
+                    <h3>$100K+</h3>
+                    <p>Fundraised for Education</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <div class="timeline">
+            <!-- Teaching Assistant -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h2>Teaching Assistant</h2>
+                        <h3>Notre Dame Engineering Department</h3>
+                        <div class="experience-meta">
+                            <span>📅 August 2024 - Present</span>
+                            <span>📍 Notre Dame, IN</span>
+                            <span>⏱️ 6 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <p>Supporting advanced computer engineering courses by bridging the gap between theoretical concepts and practical implementation. Specializing in Computer Architecture & Logic Design and Sequential Circuits.</p>
+                    </div>
+                    <div class="experience-highlights">
+                        <h4>Key Responsibilities</h4>
+                        <ul>
+                            <li>Tutor students one-on-one and in groups on complex topics including pipeline processing, cache memory optimization, and instruction set architectures</li>
+                            <li>Assist professor with grading assignments and exams, ensuring fair and consistent evaluations while providing constructive feedback</li>
+                            <li>Hold regular office hours to offer personalized academic support and clarify complex coursework concepts</li>
+                            <li>Develop supplementary learning materials and practice problems to reinforce classroom concepts</li>
+                            <li>Guide students through challenging assignments and debugging processes</li>
+                        </ul>
+                    </div>
+                    <div class="skills-gained">
+                        <span class="skill-tag">Technical Communication</span>
+                        <span class="skill-tag">Mentorship</span>
+                        <span class="skill-tag">Computer Architecture</span>
+                        <span class="skill-tag">Teaching</span>
+                        <span class="skill-tag">Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summer Fellowship -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h2>Summer Fellowship Fellow</h2>
+                        <h3>Notre Dame Center for Social Concerns</h3>
+                        <div class="experience-meta">
+                            <span>📅 June 2024 - August 2024</span>
+                            <span>📍 Kyarusozi, Uganda</span>
+                            <span>⏱️ 8-week program</span>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <p>Immersive international experience focused on educational technology and STEM accessibility in under-resourced communities. Combined research, teaching, and community engagement to drive meaningful impact.</p>
+                    </div>
+                    <div class="experience-highlights">
+                        <h4>Key Achievements</h4>
+                        <ul>
+                            <li>Conducted comprehensive research on effective STEM education methodologies, investigating innovative strategies to enhance accessibility and engagement</li>
+                            <li>Facilitated mathematics and ICT lessons for 100+ secondary school students, integrating research findings to improve learning outcomes</li>
+                            <li>Developed culturally-sensitive curriculum adaptations that increased student engagement by 40%</li>
+                            <li>Organized and coached extracurricular activities including boxing and team sports, fostering leadership and personal development</li>
+                            <li>Collaborated with local educators to implement sustainable teaching practices</li>
+                        </ul>
+                    </div>
+                    <div class="skills-gained">
+                        <span class="skill-tag">Cross-Cultural Communication</span>
+                        <span class="skill-tag">Educational Technology</span>
+                        <span class="skill-tag">Research</span>
+                        <span class="skill-tag">Community Engagement</span>
+                        <span class="skill-tag">Adaptability</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sports Program Supervisor -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h2>Sports Program Supervisor</h2>
+                        <h3>RecSports Notre Dame</h3>
+                        <div class="experience-meta">
+                            <span>📅 August 2023 - Present</span>
+                            <span>📍 Notre Dame, IN</span>
+                            <span>⏱️ 7 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <p>Managing campus-wide sports programs while ensuring safety, fairness, and operational excellence. Promoted to Manager on Duty starting August 2025.</p>
+                    </div>
+                    <div class="experience-highlights">
+                        <h4>Responsibilities & Impact</h4>
+                        <ul>
+                            <li>Supervise club and intramural sports activities across campus, managing 20+ events weekly</li>
+                            <li>Enforce safety policies and implement emergency response protocols, maintaining 100% safety record</li>
+                            <li>Coordinate with 15+ sports clubs to ensure smooth facility operations and scheduling</li>
+                            <li>Perform essential office tasks including data management, participant tracking, and equipment inventory</li>
+                            <li>Train and mentor new staff members on safety procedures and customer service</li>
+                        </ul>
+                    </div>
+                    <div class="skills-gained">
+                        <span class="skill-tag">Operations Management</span>
+                        <span class="skill-tag">Safety Protocols</span>
+                        <span class="skill-tag">Team Coordination</span>
+                        <span class="skill-tag">Data Management</span>
+                        <span class="skill-tag">Customer Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Analysis Intern -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h2>Data Analysis & Computer Vision Intern</h2>
+                        <h3>Nafith Logistics International</h3>
+                        <div class="experience-meta">
+                            <span>📅 June 2023</span>
+                            <span>📍 Amman, Jordan</span>
+                            <span>⏱️ 40 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <p>International internship combining data analytics and computer vision to optimize logistics operations for one of Jordan's leading logistics companies.</p>
+                    </div>
+                    <div class="experience-highlights">
+                        <h4>Technical Contributions</h4>
+                        <ul>
+                            <li>Cleansed and analyzed 6-month dataset in Excel, identifying key operational inefficiencies</li>
+                            <li>Developed comprehensive analysis reports using Visme, presenting findings to senior management</li>
+                            <li>Created detailed flowchart diagrams in Microsoft Visio to visualize and optimize workflow processes</li>
+                            <li>Implemented moving object detection system using Python and OpenCV, applying background subtraction, noise reduction, and optical flow algorithms</li>
+                            <li>Improved cargo tracking accuracy by 85% through computer vision implementation</li>
+                        </ul>
+                    </div>
+                    <div class="skills-gained">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">Business Intelligence</span>
+                        <span class="skill-tag">Process Optimization</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baraka Bouts Leadership -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h2>President & Captain</h2>
+                        <h3>Baraka Bouts Women's Boxing Club</h3>
+                        <div class="experience-meta">
+                            <span>📅 September 2022 - Present</span>
+                            <span>📍 Notre Dame, IN</span>
+                            <span>⏱️ 20 hours/week</span>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <p>Leading one of Notre Dame's most impactful student organizations, combining athletic excellence with philanthropic mission to support education in Uganda.</p>
+                    </div>
+                    <div class="experience-highlights">
+                        <h4>Leadership & Impact</h4>
+                        <ul>
+                            <li>Lead daily practices for 70+ athletes, developing training programs that improved overall team performance by 30%</li>
+                            <li>Commit 15+ hours weekly to rigorous training while maintaining 3.71 GPA in Computer Engineering</li>
+                            <li>Spearhead planning and execution of annual Baraka Bouts Tournament, managing logistics for 200+ attendees</li>
+                            <li>Drive fundraising initiatives contributing to $100,000+ annual goal for Holy Cross Mission Schools</li>
+                            <li>Coordinate with head coach and captains to evaluate progress and strategize for team development</li>
+                            <li>Mentor new members, fostering inclusive environment and 90% retention rate</li>
+                        </ul>
+                    </div>
+                    <div class="skills-gained">
+                        <span class="skill-tag">Leadership</span>
+                        <span class="skill-tag">Strategic Planning</span>
+                        <span class="skill-tag">Event Management</span>
+                        <span class="skill-tag">Fundraising</span>
+                        <span class="skill-tag">Team Building</span>
+                        <span class="skill-tag">Time Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.experience-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(-20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
