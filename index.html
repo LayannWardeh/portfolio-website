@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Engineering & Business</title>
+    <title>Layann Wardeh - Engineering & Business</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -43,6 +43,250 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Landing Screen */
+        .landing-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .landing-screen.hidden {
+            display: none;
+        }
+
+        /* Initial L.W. styling */
+        .initial-letters {
+            position: absolute;
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 800;
+            font-family: var(--font-heading);
+            color: var(--text-white);
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .letter-l {
+            display: inline-block;
+            transition: transform 0.8s ease;
+        }
+        
+        .letter-w {
+            display: inline-block;
+            transition: transform 0.8s ease;
+            margin-left: -0.35em;
+        }
+
+        /* Animation states */
+        .landing-screen.animate .letter-l {
+            transform: translateX(-80vw);
+        }
+
+        .landing-screen.animate .letter-w {
+            transform: translateX(80vw);
+        }
+
+        /* Hide main content initially */
+        body.landing-active {
+            overflow: hidden;
+        }
+
+        /* Hero section timing - appears immediately as letters start moving */
+        body.landing-active .hero {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        body.landing-active.animating .hero {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0s ease;
+        }
+
+        /* Keep other sections hidden until full reveal */
+        body.landing-active nav,
+        body.landing-active section:not(.hero),
+        body.landing-active footer {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Show all content when landing is complete */
+        body:not(.landing-active) nav,
+        body:not(.landing-active) section,
+        body:not(.landing-active) footer {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+
+        .landing-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Container for the animation */
+        .name-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Initial L.W. styling */
+        .initial-letters {
+            position: absolute;
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 800;
+            font-family: var(--font-heading);
+            color: var(--text-white);
+            z-index: 2;
+            display: flex;
+            gap: 2rem;
+            letter-spacing: 0;
+        }
+
+        .letter-l, .letter-w {
+            display: inline-block;
+            transition: transform 1.2s ease;
+        }
+
+        /* Full name styling */
+        .full-name {
+            position: absolute;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            font-family: var(--font-heading);
+            color: var(--text-white);
+            z-index: 3;
+            display: flex;
+            gap: 2rem;
+            opacity: 0;
+        }
+
+        .first-name, .last-name {
+            display: inline-block;
+            transition: all 1.2s ease;
+        }
+
+        .first-name {
+            transform: translateX(-100vw);
+        }
+
+        .last-name {
+            transform: translateX(100vw);
+        }
+
+        /* Animation states */
+        .landing-screen.animate .letter-l {
+            transform: translateX(-50vw);
+        }
+
+        .landing-screen.animate .letter-w {
+            transform: translateX(50vw);
+        }
+
+        .landing-screen.animate .full-name {
+            opacity: 1;
+        }
+
+        .landing-screen.animate .first-name {
+            transform: translateX(0);
+        }
+
+        .landing-screen.animate .last-name {
+            transform: translateX(0);
+        }
+
+        /* Content reveal */
+        .reveal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.8s ease 0.8s;
+            z-index: 1;
+        }
+
+        .landing-screen.animate .reveal-content {
+            opacity: 1;
+        }
+
+        .reveal-content img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+
+        .reveal-content .tagline {
+            font-size: 1.8rem;
+            color: var(--highlight-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .reveal-content .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Hide main content initially */
+        body.landing-active {
+            overflow: hidden;
+        }
+
+        body.landing-active nav,
+        body.landing-active section,
+        body.landing-active footer {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Show content when landing is hidden */
+        body:not(.landing-active) nav,
+        body:not(.landing-active) section,
+        body:not(.landing-active) footer {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        /* Hide main content initially */
+        body.landing-active {
+            overflow: hidden;
+        }
+
+        body.landing-active nav,
+        body.landing-active section,
+        body.landing-active footer {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Show content when landing is hidden */
+        body:not(.landing-active) nav,
+        body:not(.landing-active) section,
+        body:not(.landing-active) footer {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s ease 0.4s, visibility 0.8s ease 0.4s;
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -61,9 +305,8 @@
         }
 
         .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            max-width: 100%;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -75,7 +318,6 @@
             font-family: var(--font-heading);
             color: var(--text-white);
             text-decoration: none;
-            transition: all 0.3s ease;
             letter-spacing: -0.02em;
         }
 
@@ -83,9 +325,62 @@
             color: var(--highlight-color);
         }
 
+        /* Hamburger Menu */
+        .hamburger {
+            width: 30px;
+            height: 25px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--text-white);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 11px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 22px;
+        }
+
+        /* Menu Dropdown */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(26, 26, 46, 0.98);
+            backdrop-filter: blur(20px);
+            transition: right 0.3s ease;
+            padding: 100px 2rem 2rem;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
         .nav-links {
-            display: flex;
             list-style: none;
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
         }
 
@@ -97,21 +392,11 @@
             letter-spacing: 0.01em;
             transition: all 0.3s ease;
             position: relative;
+            display: inline-block;
         }
 
         .nav-links a:hover {
             color: var(--text-white);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--highlight-color);
-            transition: width 0.3s ease;
         }
 
         .nav-links a:hover::after {
@@ -140,12 +425,6 @@
                 radial-gradient(circle at 20% 50%, rgba(50, 130, 184, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(15, 76, 117, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 20%, rgba(50, 130, 184, 0.2) 0%, transparent 50%);
-            animation: pulse 10s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
         }
 
         .hero-content {
@@ -153,28 +432,15 @@
             z-index: 1;
             max-width: 900px;
             padding: 0 2rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 800;
+            font-size: 3.5rem;
             font-family: var(--font-heading);
+            font-weight: 700;
             color: var(--text-white);
             margin-bottom: 1rem;
             letter-spacing: -0.03em;
-            line-height: 1.1;
         }
 
         .hero .tagline {
@@ -187,37 +453,41 @@
         }
 
         .hero p {
-            font-size: 1.125rem;
+            font-size: 1.2rem;
+            font-weight: 400;
             color: var(--text-light);
             margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 400;
             line-height: 1.7;
         }
 
         .cta-buttons {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .cta-buttons {
+                grid-template-columns: 1fr;
+            }
         }
 
         .btn {
-            padding: 0.75rem 2rem;
-            font-size: 0.95rem;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.825rem;
             font-weight: 600;
             font-family: var(--font-primary);
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 25px;
             transition: all 0.3s ease;
             display: inline-block;
-            position: relative;
-            overflow: hidden;
             letter-spacing: 0.02em;
             text-transform: uppercase;
-            font-size: 0.875rem;
         }
 
         .btn-primary {
@@ -246,6 +516,14 @@
         section {
             padding: 5rem 0;
             position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .container {
@@ -255,12 +533,12 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 700;
+            font-size: 2.2rem;
             font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-white);
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--text-white);
             position: relative;
             letter-spacing: -0.02em;
         }
@@ -291,18 +569,17 @@
 
         .about-text h3 {
             color: var(--highlight-color);
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-family: var(--font-heading);
+            font-weight: 600;
             margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
             line-height: 1.8;
             font-size: 1.05rem;
-            font-weight: 400;
         }
 
         .skills-grid {
@@ -390,11 +667,11 @@
         }
 
         .project-content h3 {
-            color: var(--text-white);
             font-size: 1.5rem;
             font-family: var(--font-heading);
-            margin-bottom: 0.75rem;
             font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
         }
 
@@ -414,8 +691,8 @@
         .tag {
             background: rgba(50, 130, 184, 0.2);
             color: var(--highlight-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
             font-size: 0.8rem;
             font-family: var(--font-mono);
             font-weight: 500;
@@ -471,11 +748,11 @@
         }
 
         .timeline-content h3 {
-            color: var(--text-white);
             font-size: 1.4rem;
             font-family: var(--font-heading);
-            margin-bottom: 0.5rem;
             font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
         }
 
@@ -484,15 +761,14 @@
             font-size: 1.1rem;
             font-weight: 500;
             margin-bottom: 1rem;
-            font-family: var(--font-primary);
         }
 
         .timeline-date {
             color: var(--text-light);
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             font-family: var(--font-mono);
             margin-bottom: 1rem;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
         }
 
         /* Contact Section */
@@ -504,6 +780,11 @@
         .contact-content {
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
         }
 
         .contact-links {
@@ -519,7 +800,7 @@
             gap: 0.5rem;
             color: var(--text-light);
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: all 0.3s ease;
             letter-spacing: 0.01em;
@@ -543,8 +824,8 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
             .about-content {
@@ -568,22 +849,39 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .landing-nav {
+                padding: 0 1rem;
+            }
         }
     </style>
 </head>
-<body>
+<body class="landing-active">
+    <!-- Landing Screen -->
+    <div class="landing-screen" id="landingScreen">
+        <div class="initial-letters">
+            <span class="letter-l">L.</span><span class="letter-w">W.</span>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">Layann Wardeh</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="experience.html">Experience</a></li>
-                <li><a href="certifications.html">Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <a href="#home" class="logo">L.W.</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="experience.html">Experience</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -592,9 +890,11 @@
         <div class="hero-content">
             <h1>Layann Wardeh</h1>
             <p class="tagline">Transforming Business Through Technology</p>
-            <p>Senior at Notre Dame studying Computer Engineering with a minor in Engineering Corporate Practice, passionate about leveraging cutting-edge technology to drive strategic innovation and create impactful business solutions.</p>
+            <p>Senior at the University of Notre Dame studying Computer Engineering with a minor in Engineering Corporate Practice, passionate about leveraging cutting-edge technology to drive strategic innovation and create impactful business solutions.</p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#about" class="btn btn-primary">About Me</a>
+                <a href="#projects" class="btn btn-secondary">Featured Projects</a>
+                <a href="#experience" class="btn btn-secondary">Featured Experience</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
         </div>
@@ -630,9 +930,6 @@
                         Your Photo
                     </div>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="experience.html" class="btn btn-secondary">View Full Experience Timeline →</a>
             </div>
         </div>
     </section>
@@ -692,7 +989,7 @@
     <!-- Experience Section -->
     <section id="experience" class="experience">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
+            <h2 class="section-title">Featured Experiences</h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
@@ -727,6 +1024,9 @@
                     </div>
                 </div>
             </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="experience.html" class="btn btn-secondary">View All Experiences →</a>
+            </div>
         </div>
     </section>
 
@@ -754,11 +1054,64 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Layann Wardeh. Transforming Business Through Technology.</p>
+            <p>&copy; 2025 Layann Wardeh. Transforming Business Through Technology.</p>
         </div>
     </footer>
 
     <script>
+        // Landing screen interaction
+        const landingScreen = document.getElementById('landingScreen');
+        let hasInteracted = false;
+
+        function triggerAnimation() {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                landingScreen.classList.add('animate');
+                document.body.classList.add('animating');
+                
+                // Show navigation and other sections after animation
+                setTimeout(() => {
+                    landingScreen.classList.add('hidden');
+                    document.body.classList.remove('landing-active');
+                    document.body.classList.remove('animating');
+                }, 800);
+            }
+        }
+
+        // Trigger on any mouse movement
+        window.addEventListener('mousemove', triggerAnimation);
+        
+        // Trigger on scroll
+        window.addEventListener('scroll', triggerAnimation);
+        
+        // Trigger on touch (mobile)
+        window.addEventListener('touchstart', triggerAnimation);
+        
+        // Trigger on any key press
+        window.addEventListener('keydown', triggerAnimation);
+
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -779,7 +1132,7 @@
             }
         });
 
-        // Intersection Observer for fade-in animations
+        // Intersection Observer for section animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -788,17 +1141,13 @@
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
         // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'all 0.6s ease';
+        document.querySelectorAll('section:not(.hero)').forEach(section => {
             observer.observe(section);
         });
     </script>
