@@ -24,11 +24,20 @@
             --text-white: #ffffff;
             --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0f4c75 100%);
             --gradient-2: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            --accent-glow: rgba(50, 130, 184, 0.5);
+            --border-color: rgba(50, 130, 184, 0.2);
+            --card-bg: rgba(22, 33, 62, 0.3);
+            --card-hover: rgba(22, 33, 62, 0.5);
             
-            /* Typography System */
+            /* Typography */
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -40,6 +49,22 @@
             letter-spacing: -0.011em;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(50, 130, 184, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(15, 76, 117, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(50, 130, 184, 0.1) 0%, transparent 50%);
+            z-index: -1;
         }
 
         /* Navigation */
@@ -96,68 +121,204 @@
         /* Page Header */
         .page-header {
             background: var(--gradient-1);
-            padding: 8rem 0 4rem;
+            padding: 10rem 0 6rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.2; }
         }
 
         .page-header h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-family: var(--font-heading);
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-white);
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .page-header p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 400;
             color: var(--text-light);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            line-height: 1.7;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Main Content */
         .main-content {
-            padding: 4rem 0;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 4rem 2rem 6rem;
+        }
+
+        /* Project Grid Overview */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--highlight-color), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .project-card:hover {
+            background: var(--card-hover);
+            border-color: var(--highlight-color);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(50, 130, 184, 0.3);
+        }
+
+        .project-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-card-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--highlight-color);
         }
 
         /* Project Detail Section */
         .project-detail {
-            margin-bottom: 5rem;
+            margin-bottom: 6rem;
             scroll-margin-top: 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
         }
+
+        .project-detail:nth-child(2) { animation-delay: 0.1s; }
+        .project-detail:nth-child(3) { animation-delay: 0.2s; }
 
         .project-header {
             display: flex;
             align-items: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 3rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
 
         .project-icon {
             font-size: 4rem;
             background: var(--gradient-2);
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(50, 130, 184, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .project-title-section h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-family: var(--font-heading);
             font-weight: 700;
             color: var(--text-white);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             letter-spacing: -0.02em;
         }
 
@@ -171,19 +332,32 @@
         }
 
         .project-content {
-            background: rgba(22, 33, 62, 0.3);
-            padding: 3rem;
-            border-radius: 15px;
-            border: 1px solid rgba(50, 130, 184, 0.2);
+            background: var(--card-bg);
+            padding: 3.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-content::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.1;
         }
 
         .project-content h3 {
             color: var(--highlight-color);
-            font-size: 1.6rem;
+            font-size: 1.75rem;
             font-family: var(--font-heading);
             font-weight: 600;
-            margin-bottom: 1rem;
-            margin-top: 2rem;
+            margin-bottom: 1.25rem;
+            margin-top: 2.5rem;
             letter-spacing: -0.01em;
         }
 
@@ -192,64 +366,82 @@
         }
 
         .project-content p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             line-height: 1.8;
             font-size: 1.05rem;
+            color: var(--text-light);
         }
 
         .project-content ul {
             margin-left: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .project-content li {
-            margin-bottom: 0.5rem;
-            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
             font-size: 1rem;
+            color: var(--text-light);
         }
 
+        .project-content strong {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        /* Tech Stack */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 2rem;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
         }
 
         .tech-tag {
             background: rgba(50, 130, 184, 0.2);
             color: var(--highlight-color);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
             font-size: 0.9rem;
             border: 1px solid rgba(50, 130, 184, 0.4);
+            transition: all 0.3s ease;
         }
 
+        .tech-tag:hover {
+            background: rgba(50, 130, 184, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(50, 130, 184, 0.4);
+        }
+
+        /* Project Links */
         .project-links {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 0.8rem 2rem;
+            padding: 0.9rem 2.5rem;
             font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 50px;
             transition: all 0.3s ease;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
             background: var(--gradient-2);
             color: var(--text-white);
-            box-shadow: 0 4px 15px rgba(50, 130, 184, 0.4);
+            box-shadow: 0 10px 30px var(--accent-glow);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(50, 130, 184, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--accent-glow);
         }
 
         .btn-secondary {
@@ -260,6 +452,51 @@
 
         .btn-secondary:hover {
             background: var(--highlight-color);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        /* Code Preview */
+        .code-preview {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-header {
+            background: #374151;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #4b5563;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+
+        .code-dot:nth-child(2) { background: #f59e0b; }
+        .code-dot:nth-child(3) { background: #10b981; }
+
+        .code-content {
+            background: #111827;
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        .code-content pre {
+            color: #e5e7eb;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 0;
+            white-space: pre;
         }
 
         /* Back to Top */
@@ -269,17 +506,18 @@
             right: 2rem;
             background: var(--gradient-2);
             color: var(--text-white);
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(50, 130, 184, 0.4);
+            box-shadow: 0 10px 30px var(--accent-glow);
             transition: all 0.3s ease;
             opacity: 0;
             visibility: hidden;
+            font-size: 1.25rem;
         }
 
         .back-to-top.visible {
@@ -288,18 +526,27 @@
         }
 
         .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(50, 130, 184, 0.6);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px var(--accent-glow);
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .page-header h1 {
                 font-size: 2rem;
             }
 
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
             .project-header {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .project-title-section h2 {
+                font-size: 2rem;
             }
 
             .project-content {
@@ -309,19 +556,61 @@
             .project-meta {
                 flex-direction: column;
                 gap: 0.5rem;
+                align-items: center;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-inner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--highlight-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-inner"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">L.W.</a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="experience.html">Experience</a></li>
-                <li><a href="certifications.html">Certifications</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
         </div>
@@ -330,11 +619,478 @@
     <!-- Page Header -->
     <header class="page-header">
         <h1>Projects Portfolio</h1>
-        <p>Showcasing innovative solutions at the intersection of technology and business strategy</p>
+        <p>Exploring diverse technical challenges through hands-on development and creative problem-solving</p>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
+        <!-- Projects Grid Overview -->
+        <section class="projects-grid">
+            <div class="project-card" onclick="scrollToProject('ftl')">
+                <div class="project-card-icon">💾</div>
+                <h3>Flash Translation Layer Simulator</h3>
+                <p>SSD flash translation layer with wear leveling and garbage collection</p>
+                <div class="project-card-meta">
+                    <span>C Programming</span>
+                    <span>May 2025</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="scrollToProject('vmm')">
+                <div class="project-card-icon">🧠</div>
+                <h3>Virtual Memory Manager</h3>
+                <p>Demand paging system with TLB simulation and page replacement</p>
+                <div class="project-card-meta">
+                    <span>Memory Management</span>
+                    <span>April 2025</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="scrollToProject('printer')">
+                <div class="project-card-icon">🖨️</div>
+                <h3>3D Printer Job Scheduler</h3>
+                <p>Multi-threaded scheduler with concurrent job queue management</p>
+                <div class="project-card-meta">
+                    <span>Concurrency</span>
+                    <span>April 2025</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="scrollToProject('threads')">
+                <div class="project-card-icon">🔄</div>
+                <h3>Thread Performance Analyzer</h3>
+                <p>Benchmarking tool for thread behavior and scalability analysis</p>
+                <div class="project-card-meta">
+                    <span>Performance</span>
+                    <span>March 2025</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="scrollToProject('process')">
+                <div class="project-card-icon">⚡</div>
+                <h3>Process Management Toolkit</h3>
+                <p>Command-line tool to execute, trace, and benchmark processes</p>
+                <div class="project-card-meta">
+                    <span>Process Control</span>
+                    <span>February 2025</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="scrollToProject('dirwatch')">
+                <div class="project-card-icon">📁</div>
+                <h3>Directory Watch Tool</h3>
+                <p>Real-time Unix directory monitoring with responsive terminal UI</p>
+                <div class="project-card-meta">
+                    <span>File Systems</span>
+                    <span>January 2025</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="scrollToProject('crossword')">
+                <div class="project-card-icon">🔤</div>
+                <h3>Crossword Anagram Generator</h3>
+                <p>Puzzle generator with word placement algorithm and anagram clues</p>
+                <div class="project-card-meta">
+                    <span>Algorithms</span>
+                    <span>April 2023</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="scrollToProject('gameoflife')">
+                <div class="project-card-icon">🔲</div>
+                <h3>Conway's Game of Life</h3>
+                <p>Interactive cellular automaton simulation with custom animations</p>
+                <div class="project-card-meta">
+                    <span>C Programming</span>
+                    <span>March 2023</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flash Translation Layer Simulator -->
+        <section id="ftl" class="project-detail">
+            <div class="project-header">
+                <div class="project-icon">💾</div>
+                <div class="project-title-section">
+                    <h2>Flash Translation Layer Simulator</h2>
+                    <div class="project-meta">
+                        <span>📅 May 2025</span>
+                        <span>📍 Operating Systems Course</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Overview</h3>
+                <p>Simulated an SSD flash translation layer (FTL) with logical-to-physical mapping, garbage collection, and wear leveling.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>FTL Mapping:</strong> Translates logical to physical addresses</li>
+                    <li><strong>Garbage Collection:</strong> Reclaims invalidated blocks</li>
+                    <li><strong>Wear-Leveling:</strong> Balances write cycles across blocks</li>
+                    <li><strong>Metrics:</strong> Tracks write amplification, erase counts, and wear distribution</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">Custom Simulation Engine</span>
+                    <span class="tech-tag">Flash Memory Concepts</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Virtual Memory Manager -->
+        <section id="vmm" class="project-detail">
+            <div class="project-header">
+                <div class="project-icon">🧠</div>
+                <div class="project-title-section">
+                    <h2>Virtual Memory Manager</h2>
+                    <div class="project-meta">
+                        <span>📅 April 2025</span>
+                        <span>📍 Operating Systems Course</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Overview</h3>
+                <p>Implemented a virtual memory system with demand paging, page tables, and TLB simulation. Tracked page faults and optimized access time.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Page Table Management:</strong> Supports single- and two-level paging</li>
+                    <li><strong>Address Translation:</strong> Converts virtual to physical addresses with TLB caching</li>
+                    <li><strong>Statistics:</strong> Reports hit/miss rates, memory usage, and effective access time</li>
+                    <li><strong>Replacement Policy:</strong> FIFO or LRU for page eviction</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">Memory Mapping</span>
+                    <span class="tech-tag">TLB Simulation</span>
+                    <span class="tech-tag">Bit Manipulation</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Printer Job Scheduler -->
+        <section id="printer" class="project-detail">
+            <div class="project-header">
+                <div class="project-icon">🖨️</div>
+                <div class="project-title-section">
+                    <h2>3D Printer Job Scheduler</h2>
+                    <div class="project-meta">
+                        <span>📅 April 2025</span>
+                        <span>📍 Operating Systems Course</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Overview</h3>
+                <p>Built a multi-threaded interactive scheduler for managing print jobs. Simulated real-world concurrency challenges with thread-safe job queues.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Producer-Consumer Pattern:</strong> Threads manage job arrival and execution</li>
+                    <li><strong>Command Interface:</strong> Allows dynamic job submission and status checks</li>
+                    <li><strong>Synchronization:</strong> Prevents race conditions via mutexes and condition vars</li>
+                    <li><strong>Statistics:</strong> Tracks active jobs, wait times, and queue state</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">POSIX Threads</span>
+                    <span class="tech-tag">Mutexes</span>
+                    <span class="tech-tag">Condition Variables</span>
+                </div>
+
+                <!-- Screenshots -->
+                <div style="margin-top: 3rem;">
+                    <h3>Screenshots</h3>
+                    
+                    <!-- Job Submission and Status -->
+                    <div class="code-preview" style="margin-top: 1.5rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">printsched> list
+ID     Status      Input File               Output File              Input Size   Output Size  Submit Time  Start Time   Complete Time
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+printsched> submit cube.gcode output.png
+Job 1 submitted.
+printsched> list
+ID     Status      Input File               Output File              Input Size   Output Size  Submit Time  Start Time   Complete Time
+-----------------------------------------------------------------------------------------------------------------------------------------
+1      PRINTING    cube.gcode               output.png               155692       0            20:10:38     20:10:38     N/A</pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Multiple Jobs Completed -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">printsched> submit cube.gcode output1.png
+Job 2 submitted.
+printsched> submit cube.gcode output2.png
+Job 3 submitted.
+printsched> submit cube.gcode output3.png
+Job 4 submitted.
+printsched> list
+ID     Status      Input File               Output File              Input Size   Output Size  Submit Time  Start Time   Complete Time
+-----------------------------------------------------------------------------------------------------------------------------------------
+1      COMPLETE    cube.gcode               output.png               155692       203124       20:10:38     20:10:38     20:10:40
+2      COMPLETE    cube.gcode               output1.png              155692       203124       20:11:10     20:11:10     20:11:12
+3      COMPLETE    cube.gcode               output2.png              155692       203124       20:11:13     20:11:13     20:11:14
+4      PRINTING    cube.gcode               output3.png              155692       0            20:11:16     20:11:16     N/A
+
+Average Turnaround Time: 1.67 seconds
+Average Response Time  : 0.00 seconds
+printsched> waitall
+All jobs completed.</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thread Performance Analyzer -->
+        <section id="threads" class="project-detail">
+            <div class="project-header">
+                <div class="project-icon">🔄</div>
+                <div class="project-title-section">
+                    <h2>Thread Performance Analyzer</h2>
+                    <div class="project-meta">
+                        <span>📅 March 2025</span>
+                        <span>📍 Operating Systems Course</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Overview</h3>
+                <p>Designed experiments to measure thread behavior under different workloads. Explored scheduling, parallelism, and synchronization overhead.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Multi-Threaded Experiments:</strong> Vary thread counts and CPU bindings</li>
+                    <li><strong>Timing Analysis:</strong> Compare wall-clock and CPU time</li>
+                    <li><strong>Scalability Insights:</strong> Evaluated speedup and contention</li>
+                    <li><strong>Lightweight Code:</strong> Focused on measurement accuracy with minimal overhead</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">POSIX Threads (pthreads)</span>
+                    <span class="tech-tag">clock_gettime()</span>
+                    <span class="tech-tag">pthread_create()</span>
+                </div>
+
+                <!-- Screenshots -->
+                <div style="margin-top: 3rem;">
+                    <h3>Screenshots</h3>
+                    
+                    <!-- Progressive Performance Test -->
+                    <div class="code-preview" style="margin-top: 1.5rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;"><span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./progressperf 5555555 1
+100% [======================================================]
+size 5555555 threads 1 sum 1849684726792 time 156.99707ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./progressperf 5555555 2
+100% [======================================================]
+size 5555555 threads 2 sum 1849684726792 time 385.41602ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./progressperf 5555555 3
+100% [======================================================]
+size 5555555 threads 3 sum 1849684726792 time 434.48193ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./progressperf 5555555 4
+100% [======================================================]
+size 5555555 threads 4 sum 1849684726792 time 474.02222ms</pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Sequential Performance Test -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;"><span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./seqperf 5555555
+size 5555555 sum 1849684726792 time 13.484ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./seqperf 5555555
+size 5555555 sum 1849684726792 time 13.065ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./seqperf 5555555
+size 5555555 sum 1849684726792 time 13.034ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./seqperf 1234567
+size 1234567 sum 410729960324 time 2.880ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./seqperf 1234567
+size 1234567 sum 410729960324 time 2.897ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./seqperf 1234567
+size 1234567 sum 410729960324 time 2.957ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./seqperf 1234567
+size 1234567 sum 410729960324 time 2.869ms</pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Synchronous Performance Test -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;"><span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./syncperf 1234567 1
+size 1234567 threads 1 sum 410729960324 time 21.89990ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./syncperf 1234567 2
+size 1234567 threads 2 sum 410729960324 time 134.96680ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./syncperf 1234567 3
+size 1234567 threads 3 sum 410729960324 time 138.56494ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./syncperf 1234567 4
+size 1234567 threads 4 sum 410729960324 time 190.76001ms</pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Thread Performance Test -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;"><span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./threadperf 5555555 1
+size 5555555 threads 1 sum 1849684726792 time 16.00488ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./threadperf 5555555 2
+size 5555555 threads 2 sum 1849684726792 time 8.51392ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./threadperf 5555555 3
+size 5555555 threads 3 sum 1849684726792 time 5.86304ms
+<span style="color: #ff8c00;">student11.cse.nd.edu</span> <span style="color: #00bfff;">lwardeh</span> ~ OS project3 ./threadperf 5555555 4
+size 5555555 threads 4 sum 1849684726792 time 4.69092ms</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Management Toolkit -->
+        <section id="process" class="project-detail">
+            <div class="project-header">
+                <div class="project-icon">⚡</div>
+                <div class="project-title-section">
+                    <h2>Process Management Toolkit</h2>
+                    <div class="project-meta">
+                        <span>📅 February 2025</span>
+                        <span>📍 Operating Systems Course</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3>Overview</h3>
+                <p>Built a command-line tool to execute, trace, and benchmark processes in Unix. Demonstrated understanding of process creation, execution, and resource usage.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Custom Shell (psh):</strong> Executes commands with support for fork() and exec()</li>
+                    <li><strong>Execution Tracing:</strong> Displays process exit status and signals</li>
+                    <li><strong>Resource Measurement:</strong> Measures CPU time and wall-clock time</li>
+                    <li><strong>Robust Handling:</strong> Catches failed commands and invalid usage gracefully</li>
+                </ul>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">POSIX</span>
+                    <span class="tech-tag">fork()</span>
+                    <span class="tech-tag">execvp()</span>
+                    <span class="tech-tag">waitpid()</span>
+                    <span class="tech-tag">getrusage()</span>
+                </div>
+
+                <!-- Screenshots Gallery -->
+                <div style="margin-top: 3rem;">
+                    <h3>Shell in Action</h3>
+                    
+                    <!-- Screenshot 1: List Command -->
+                    <div class="code-preview" style="margin-top: 1.5rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">myshell> list
+NAME                    SIZE      TYPE    MODE    OWNER
+--------------------------------------------------------------------------------
+.                       157 B     dir     0700    lwardeh
+..                      148 B     dir     0700    lwardeh
+c2.txt                  35 B      file    0600    lwardeh
+commands.txt            61 B      file    0600    lwardeh
+test                    98 B      dir     0700    lwardeh
+myshell_tests.txt       2232 B    file    0600    lwardeh
+Makefile                239 B     file    0600    lwardeh
+myshell.c               14892 B   file    0600    lwardeh
+myshell                 35880 B   file    0700    lwardeh
+--------------------------------------------------------------------------------</pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Screenshot 2: Directory Navigation -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">myshell> chdir test
+myshell> list
+NAME                    SIZE      TYPE    MODE    OWNER
+--------------------------------------------------------------------------------
+.                       98 B      dir     0700    lwardeh
+..                      157 B     dir     0700    lwardeh
+txt.txt                 0 B       file    0600    lwardeh
+hi                      0 B       file    0600    lwardeh
+as                      0 B       file    0600    lwardeh
+test2                   18 B      dir     0700    lwardeh
+commands.txt            61 B      file    0600    lwardeh
+--------------------------------------------------------------------------------
+
+myshell> pwd
+/escnfs/home/lwardeh/OS/project2/test</pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Screenshot 3: Process Management -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">myshell> start test1
+myshell: process 2612555 started
+myshell> start test2
+myshell: process 2612565 started
+myshell> kill 2612555
+myshell: process 2612555 has been killed</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Directory Watch Tool -->
         <section id="dirwatch" class="project-detail">
             <div class="project-header">
@@ -344,72 +1100,45 @@
                     <div class="project-meta">
                         <span>📅 January 2025</span>
                         <span>📍 Operating Systems Course</span>
-                        <span>🏆 Grade: 100%</span>
                     </div>
                 </div>
             </div>
             <div class="project-content">
-                <h3>Project Overview</h3>
-                <p>Developed a robust Unix system monitoring tool that continuously tracks and displays directory contents in real-time. This project demonstrated mastery of system programming, error handling, and user interface design in a terminal environment.</p>
+                <h3>Overview</h3>
+                <p>Developed a real-time Unix directory monitoring tool using C. Displays live file system updates with a responsive terminal UI and robust error handling.</p>
                 
-                <h3>Technical Implementation</h3>
-                <ul>
-                    <li>Built using pure C with extensive use of Unix system calls including opendir, readdir, stat, lstat, and readlink</li>
-                    <li>Implemented automatic 3-second refresh cycle for real-time monitoring of file system changes</li>
-                    <li>Created dynamic terminal UI that adapts to window resizing using TIOCGWINSZ ioctl calls</li>
-                    <li>Developed comprehensive error handling for 15+ different failure scenarios</li>
-                    <li>Replaced non-printable characters with placeholders to maintain display integrity</li>
-                </ul>
-
                 <h3>Key Features</h3>
                 <ul>
-                    <li><strong>Smart Display Management:</strong> Automatically adjusts column widths based on terminal size</li>
-                    <li><strong>File Content Preview:</strong> Shows first line of files, symlink targets, and directory indicators</li>
-                    <li><strong>Graceful Degradation:</strong> Displays "(truncated)" when content exceeds screen space</li>
-                    <li><strong>Window Size Detection:</strong> Shows "Window dimensions are too small" message when terminal is resized below minimum threshold</li>
-                    <li><strong>Comprehensive File Info:</strong> Displays file type, size, permissions (octal), owner name, and content summary</li>
-                </ul>
-
-                <h3>Error Handling Excellence</h3>
-                <p>Achieved perfect score by implementing bulletproof error handling:</p>
-                <ul>
-                    <li>No segmentation faults possible under any invocation scenario</li>
-                    <li>Graceful handling of permission denied, missing files, and invalid paths</li>
-                    <li>Informative error messages using strerror() for all failure conditions</li>
-                    <li>Continuous operation despite individual file access failures</li>
-                    <li>Prevention of busy-waiting through proper delay implementation</li>
-                </ul>
-
-                <h3>Technical Achievements</h3>
-                <ul>
-                    <li>Successfully handled edge cases including symbolic links, empty files, and special characters</li>
-                    <li>Implemented efficient directory traversal without memory leaks</li>
-                    <li>Created professional columnar output formatting with proper alignment</li>
-                    <li>Maintained clean, well-documented code following Unix programming conventions</li>
+                    <li><strong>Live Refresh:</strong> Auto-updates every 3 seconds</li>
+                    <li><strong>Smart Layout:</strong> Dynamic column widths; truncates when terminal is too small</li>
+                    <li><strong>Detailed Display:</strong> Shows file type, size, permissions, owner, and first-line content</li>
+                    <li><strong>Edge-Case Ready:</strong> Handles symbolic links, special chars, empty files, and errors gracefully</li>
+                    <li><strong>POSIX-Compliant:</strong> Clean system call usage and no memory leaks</li>
                 </ul>
 
                 <div class="tech-stack">
                     <span class="tech-tag">C</span>
-                    <span class="tech-tag">Unix System Calls</span>
                     <span class="tech-tag">POSIX</span>
+                    <span class="tech-tag">Unix System Calls</span>
+                    <span class="tech-tag">opendir</span>
+                    <span class="tech-tag">stat</span>
+                    <span class="tech-tag">readlink</span>
                     <span class="tech-tag">Terminal UI</span>
-                    <span class="tech-tag">Error Handling</span>
-                    <span class="tech-tag">File Systems</span>
-                    <span class="tech-tag">Process Management</span>
                 </div>
 
-                <div class="project-links">
-                    <a href="#" class="btn btn-primary">View Code</a>
-                    <a href="#" class="btn btn-secondary">Documentation</a>
-                </div>
-
-                <!-- Screenshot Gallery -->
+                <!-- Screenshots Gallery -->
                 <div style="margin-top: 3rem;">
                     <h3>Screenshots</h3>
-                    <div style="background: #1a1a1a; padding: 2rem; border-radius: 10px; margin-top: 1rem;">
-                        <p style="color: #4caf50; font-family: var(--font-mono); margin-bottom: 1rem;">Normal Operation - Full Directory Display:</p>
-                        <pre style="color: #bbe1fa; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.4; overflow-x: auto;">
-Contents of /escnfs/home/lwardeh/OS/project1 on 21:25:24 on 06/23/2025
+                    
+                    <!-- Screenshot 1: Normal Operation -->
+                    <div class="code-preview" style="margin-top: 1.5rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">Contents of /escnfs/home/lwardeh/OS/project1 on 21:25:24 on 06/23/2025
 
 NAME                    SIZE      TYPE    MODE    OWNER     CONTENTS
 --------------------------------------------------------------------------------
@@ -423,18 +1152,30 @@ dirwatch                26536 B   file    0700    lwardeh   #ELF###
 --------------------------------------------------------------------------------
 
 total: 4 files, 2 directories, and 1 symlink</pre>
+                        </div>
                     </div>
                     
-                    <div style="background: #1a1a1a; padding: 2rem; border-radius: 10px; margin-top: 1rem;">
-                        <p style="color: #4caf50; font-family: var(--font-mono); margin-bottom: 1rem;">Graceful Handling - Window Too Small:</p>
-                        <pre style="color: #bbe1fa; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.4;">
-Window dimensions are too small</pre>
+                    <!-- Screenshot 2: Window Too Small -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">Window dimensions are too small</pre>
+                        </div>
                     </div>
                     
-                    <div style="background: #1a1a1a; padding: 2rem; border-radius: 10px; margin-top: 1rem;">
-                        <p style="color: #4caf50; font-family: var(--font-mono); margin-bottom: 1rem;">Truncation Feature - Limited Display Space:</p>
-                        <pre style="color: #bbe1fa; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.4; overflow-x: auto;">
-Contents of /escnfs/home/lwardeh/OS/project1 on 21:26:27 on 06/23/2025
+                    <!-- Screenshot 3: Truncation Feature -->
+                    <div class="code-preview" style="margin-top: 2rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem;">Contents of /escnfs/home/lwardeh/OS/project1 on 21:26:27 on 06/23/2025
 
 NAME                    SIZE      TYPE    MODE    OWNER     CONTENTS
 --------------------------------------------------------------------------------
@@ -448,132 +1189,249 @@ Makefile                240 B     file    0600    lwardeh   # Configuration#
 --------------------------------------------------------------------------------
 
 total: 3 files, 2 directories, and 1 symlink</pre>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Capsim Project -->
-        <section id="capsim" class="project-detail">
+        <!-- Crossword Anagram Generator -->
+        <section id="crossword" class="project-detail">
             <div class="project-header">
-                <div class="project-icon">💼</div>
+                <div class="project-icon">🔤</div>
                 <div class="project-title-section">
-                    <h2>Capsim Business Simulation</h2>
+                    <h2>Crossword Anagram Generator</h2>
                     <div class="project-meta">
-                        <span>📅 February 2025 - April 2025</span>
-                        <span>📍 Notre Dame</span>
-                        <span>👥 Team Project</span>
+                        <span>📅 April 2023</span>
+                        <span>📍 Fundamentals of Computing</span>
                     </div>
                 </div>
             </div>
             <div class="project-content">
-                <h3>Project Overview</h3>
-                <p>Leading strategic decision-making in a competitive business simulation environment, where our team manages a virtual company competing against other teams in a dynamic market. This project demonstrates the practical application of engineering principles to business strategy and operations.</p>
+                <h3>Overview</h3>
+                <p>Designed a crossword puzzle generator in C that arranges intersecting words on a 15×15 board and outputs playable anagram-based clues. Implemented full puzzle creation logic, error handling, and multiple I/O modes.</p>
                 
-                <h3>Key Responsibilities</h3>
+                <h3>Key Features</h3>
                 <ul>
-                    <li>Optimize product development cycles using data-driven decision making</li>
-                    <li>Implement pricing strategies based on market analysis and competitor behavior</li>
-                    <li>Manage production capacity and inventory levels to maximize efficiency</li>
-                    <li>Develop marketing strategies to capture market share across different segments</li>
-                </ul>
-
-                <h3>Technical Implementation</h3>
-                <p>Designed and implemented a custom forecasting model using Excel and Python to predict:</p>
-                <ul>
-                    <li>Sales trends across multiple product lines</li>
-                    <li>Optimal inventory levels to minimize holding costs</li>
-                    <li>Financial performance metrics including ROI, profit margins, and cash flow</li>
-                    <li>Market demand fluctuations based on historical data</li>
-                </ul>
-
-                <h3>Business Impact</h3>
-                <p>Through systematic analysis and strategic planning, our team achieved:</p>
-                <ul>
-                    <li>Improved decision accuracy by 35% through predictive modeling</li>
-                    <li>Optimized resource allocation resulting in higher profit margins</li>
-                    <li>Developed sustainable competitive positioning strategies</li>
-                    <li>Enhanced cross-functional collaboration and leadership skills</li>
+                    <li><strong>Word Processing:</strong> Reads up to 20 words (from user or file), filters invalid entries, and converts to uppercase</li>
+                    <li><strong>Board Generation:</strong> Builds crossword with proper spacing and single-letter intersections using a placement algorithm</li>
+                    <li><strong>Anagram Clues:</strong> Randomizes each valid word to produce clue hints</li>
+                    <li><strong>Three Output Modes:</strong> Interactive input, file input, and file-to-file processing</li>
+                    <li><strong>Puzzle Output:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li><em>Solution View:</em> Words placed, unused cells marked with .</li>
+                            <li><em>Puzzle View:</em> Word spaces left blank, unused cells marked with #</li>
+                            <li><em>Clue List:</em> Start coordinate, direction (Across/Down), and anagram</li>
+                        </ul>
+                    </li>
                 </ul>
 
                 <div class="tech-stack">
-                    <span class="tech-tag">Excel</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Data Visualization</span>
-                    <span class="tech-tag">Financial Modeling</span>
-                    <span class="tech-tag">Strategic Planning</span>
-                    <span class="tech-tag">Market Analysis</span>
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">String Manipulation</span>
+                    <span class="tech-tag">2D Arrays</span>
+                    <span class="tech-tag">Sorting</span>
+                    <span class="tech-tag">File I/O</span>
+                    <span class="tech-tag">Custom Data Structures</span>
+                    <span class="tech-tag">Makefile</span>
+                </div>
+
+                <!-- Screenshots -->
+                <div style="margin-top: 3rem;">
+                    <h3>Screenshots</h3>
+                    
+                    <div class="code-preview" style="margin-top: 1.5rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem; font-size: 0.875rem;">Enter a list of words followed by '.':
+notredame
+irish
+football
+computer
+engineering
+research
+boxing
+uganda
+.
+
+
+Solution:
++---------------+
+|......U........|
+|..C...G........|
+|.FOOTBALL......|
+|..M...N........|
+|..P...D..N.....|
+|..U...A.BOXING.|
+|..T.....T......|
+|..ENGINEERING..|
+|..R.....E...I..|
+|........D...R..|
+|........A...I..|
+|........M...S..|
+|.....RESEARCH..|
+|...............|
+|...............|
++---------------+
+
+
+Crossword Puzzle:
++---------------+
+|###### ########|
+|## ### ########|
+|# ###### ######|
+|## ### ########|
+|## ### ## #####|
+|## ### # ######|
+|## ##### ######|
+|## ##|
+|## ###### ### #|
+|######## ### #|
+|######## ### #|
+|######## ### #|
+|##### #|
+|###############|
+|###############|
++---------------+
+
+Clues:
+
+ 8, 3 Across ENNIGNIREGE
+ 5,10 Down   ETEMRDNOA
+13, 7 Across EHAERRSRC
+ 2, 3 Down   MCORETPU
+ 3, 2 Across BAOTLLOF
+ 1, 7 Down   AAUNGD
+ 6, 9 Across OXGIBN
+ 9,14 Down   IHRIS</pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Operating Systems Project -->
-        <section id="scheduler" class="project-detail">
+        <!-- Conway's Game of Life -->
+        <section id="gameoflife" class="project-detail">
             <div class="project-header">
-                <div class="project-icon">⚙️</div>
+                <div class="project-icon">🔲</div>
                 <div class="project-title-section">
-                    <h2>Multi-Core Process Scheduler</h2>
+                    <h2>Conway's Game of Life</h2>
                     <div class="project-meta">
-                        <span>📅 September 2024</span>
-                        <span>📍 Computer Engineering Course</span>
-                        <span>👤 Individual Project</span>
+                        <span>📅 March 2023</span>
+                        <span>📍 Fundamentals of Computing</span>
                     </div>
                 </div>
             </div>
             <div class="project-content">
-                <h3>Project Overview</h3>
-                <p>Developed a sophisticated multi-core process queue shell in C that efficiently manages job distribution across CPU cores. This project demonstrates deep understanding of operating system concepts and low-level programming expertise.</p>
+                <h3>Overview</h3>
+                <p>Simulated Conway's Game of Life on a 40×40 grid with both interactive and batch modes. Practiced 2D array manipulation, command-line processing, and animation techniques in C.</p>
                 
-                <h3>Technical Architecture</h3>
-                <p>The scheduler implements advanced algorithms to optimize CPU utilization:</p>
+                <h3>Key Features</h3>
                 <ul>
-                    <li>First-In-First-Out (FIFO) scheduling for baseline performance</li>
-                    <li>Round Robin scheduling with configurable time quantum</li>
-                    <li>Dynamic load balancing across multiple CPU cores</li>
-                    <li>Process priority management and preemption</li>
-                </ul>
-
-                <h3>Implementation Details</h3>
-                <ul>
-                    <li>Built using pure C for optimal performance and hardware control</li>
-                    <li>Implemented inter-process communication using pipes and signals</li>
-                    <li>Created custom data structures for efficient process queue management</li>
-                    <li>Developed comprehensive testing suite for edge cases and performance benchmarking</li>
-                </ul>
-
-                <h3>Performance Achievements</h3>
-                <p>The scheduler demonstrated significant improvements in system efficiency:</p>
-                <ul>
-                    <li>Reduced average process wait time by 40%</li>
-                    <li>Achieved 95% CPU utilization under heavy load</li>
-                    <li>Minimized context switching overhead through intelligent scheduling</li>
-                    <li>Scaled efficiently from 2 to 8 CPU cores</li>
+                    <li><strong>Interactive Mode:</strong> Add/remove live cells, step through iterations, or animate continuously</li>
+                    <li><strong>Batch Mode:</strong> Loads a predefined scene from a text file and plays it automatically</li>
+                    <li><strong>Custom Animation:</strong> Used usleep() and system("clear") for visualizing cell evolution</li>
+                    <li><strong>Scene Design:</strong> Created a custom scene (myscene.txt) with still lifes, oscillators, gliders, and explosive patterns</li>
+                    <li><strong>Modular Architecture:</strong> Separated logic into multiple C files and used a Makefile for builds</li>
                 </ul>
 
                 <div class="tech-stack">
-                    <span class="tech-tag">C Programming</span>
-                    <span class="tech-tag">Operating Systems</span>
-                    <span class="tech-tag">Algorithms</span>
-                    <span class="tech-tag">Multi-threading</span>
-                    <span class="tech-tag">System Programming</span>
-                    <span class="tech-tag">Performance Optimization</span>
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">2D Arrays</span>
+                    <span class="tech-tag">Makefile</span>
+                    <span class="tech-tag">Terminal Animation</span>
+                    <span class="tech-tag">Command-Line Args</span>
                 </div>
 
-                <div class="project-links">
-                    <a href="#" class="btn btn-primary">View Code</a>
-                    <a href="#" class="btn btn-secondary">Documentation</a>
+                <!-- Screenshot -->
+                <div style="margin-top: 3rem;">
+                    <h3>Interactive Mode</h3>
+                    
+                    <div class="code-preview" style="margin-top: 1.5rem;">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                        </div>
+                        <div class="code-content" style="background: #1a1a1a;">
+                            <pre style="color: #c0c0c0; margin: 0; padding: 1.5rem; font-size: 0.875rem;">Enter a followed by two integers to add a new live cell.
+Enter r followed by two integers to remove a live cell.
+Enter n to advance the simulation to the next iteration.
+Enter q to quit the game.
+Enter p to play the game continuously.
+Command: a 2 0
+----------------------------------------
+|                                      |
+|                                      |
+|X                                     |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+|                                      |
+----------------------------------------</pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- Add more projects here as needed -->
     </main>
 
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
     <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+        });
+
         // Smooth scrolling for anchor links
+        function scrollToProject(projectId) {
+            const element = document.getElementById(projectId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -589,6 +1447,7 @@ total: 3 files, 2 directories, and 1 symlink</pre>
 
         // Back to top button functionality
         const backToTop = document.getElementById('backToTop');
+        
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 backToTop.classList.add('visible');
@@ -603,6 +1462,26 @@ total: 3 files, 2 directories, and 1 symlink</pre>
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe project details
+        document.querySelectorAll('.project-detail').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
