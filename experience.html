@@ -24,6 +24,7 @@
             --text-white: #ffffff;
             --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0f4c75 100%);
             --gradient-2: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            --gradient-3: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
             
             /* Typography System */
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -40,17 +41,155 @@
             letter-spacing: -0.011em;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--highlight-color) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--accent-color) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, var(--highlight-color) 0%, transparent 50%);
+            animation: bgAnimation 20s ease-in-out infinite;
+        }
+
+        @keyframes bgAnimation {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--highlight-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-2);
+            z-index: 10001;
+            transition: width 0.3s ease;
+        }
+
+        /* Scroll Indicator Dots */
+        .scroll-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .scroll-indicator ul {
+            list-style: none;
+        }
+
+        .scroll-indicator li {
+            margin: 15px 0;
+        }
+
+        .scroll-indicator a {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(50, 130, 184, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .scroll-indicator a.active {
+            background: var(--highlight-color);
+            transform: scale(1.5);
+            box-shadow: 0 0 20px var(--highlight-color);
+        }
+
+        .scroll-indicator a:hover {
+            background: var(--highlight-color);
+            transform: scale(1.3);
+        }
+
+        .scroll-indicator .tooltip {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 26, 46, 0.9);
+            color: var(--text-white);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .scroll-indicator a:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* Navigation with glass effect */
         nav {
             position: fixed;
             width: 100%;
             top: 0;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(50, 130, 184, 0.2);
+        }
+
+        nav.scrolled {
+            padding: 0.7rem 0;
+            background: rgba(26, 26, 46, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .nav-container {
@@ -64,8 +203,26 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
+            font-family: var(--font-heading);
             color: var(--text-white);
             text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-2);
+            transition: left 0.3s ease;
+        }
+
+        .logo:hover::after {
+            left: 0;
         }
 
         .nav-links {
@@ -79,6 +236,22 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -89,17 +262,41 @@
             color: var(--highlight-color);
         }
 
-        /* Page Header */
+        /* Page Header with animated gradient */
         .page-header {
             background: var(--gradient-1);
-            padding: 8rem 0 4rem;
+            padding: 10rem 0 5rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(50, 130, 184, 0.3) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .page-header h1 {
-            font-size: 3rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: var(--font-heading);
+            font-weight: 700;
             color: var(--text-white);
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
         }
 
         .page-header p {
@@ -107,17 +304,139 @@
             color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animated text gradient */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--highlight-color), var(--text-white), var(--highlight-color));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Main Content */
         .main-content {
-            padding: 4rem 0;
             max-width: 1000px;
             margin: 0 auto;
             padding: 4rem 2rem;
+            position: relative;
         }
 
-        /* Experience Timeline */
+        /* Stats Section with counters */
+        .stats-section {
+            background: rgba(22, 33, 62, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 1px solid rgba(50, 130, 184, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(50, 130, 184, 0.1), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .stat-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-family: var(--font-mono);
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .stat-item p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Progress circle for stats */
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .progress-circle svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle circle {
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .progress-circle .bg {
+            stroke: rgba(50, 130, 184, 0.2);
+        }
+
+        .progress-circle .progress {
+            stroke: var(--highlight-color);
+            stroke-dasharray: 339.292;
+            stroke-dashoffset: 339.292;
+            transition: stroke-dashoffset 2s ease;
+            stroke-linecap: round;
+        }
+
+        /* Experience Timeline with animated line */
         .timeline {
             position: relative;
             padding: 2rem 0;
@@ -130,13 +449,62 @@
             top: 0;
             bottom: 0;
             width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--highlight-color), transparent);
+            background-size: 100% 200%;
+            animation: lineFlow 3s ease-in-out infinite;
+        }
+
+        @keyframes lineFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        .timeline-progress {
+            position: absolute;
+            left: 50px;
+            top: 0;
+            width: 2px;
             background: var(--gradient-2);
+            transform-origin: top;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
         }
 
         .timeline-item {
             position: relative;
             padding-left: 100px;
             margin-bottom: 3rem;
+            opacity: 0;
+        }
+
+        .timeline-item.animate-left {
+            animation: slideInLeft 0.6s ease forwards;
+        }
+
+        .timeline-item.animate-right {
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item:nth-child(odd) {
+            transform: translateX(-50px);
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateX(50px);
         }
 
         .timeline-dot {
@@ -148,20 +516,72 @@
             background: var(--highlight-color);
             border-radius: 50%;
             box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 6px var(--highlight-color);
+            z-index: 2;
+            animation: pulse 2s ease-in-out infinite;
         }
 
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 6px var(--highlight-color); }
+            50% { box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 12px rgba(50, 130, 184, 0.3); }
+            100% { box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 6px var(--highlight-color); }
+        }
+
+        .timeline-dot.active {
+            background: var(--text-white);
+            animation: none;
+            transform: scale(1.3);
+        }
+
+        /* Experience cards with glass morphism */
         .experience-card {
             background: rgba(22, 33, 62, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 2.5rem;
-            border-radius: 15px;
+            border-radius: 20px;
             border: 1px solid rgba(50, 130, 184, 0.2);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .experience-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(50, 130, 184, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .experience-card:hover::after {
+            opacity: 1;
         }
 
         .experience-card:hover {
-            transform: translateX(5px);
+            transform: translateY(-5px) scale(1.02);
             border-color: var(--highlight-color);
-            box-shadow: 0 5px 20px rgba(50, 130, 184, 0.3);
+            box-shadow: 0 20px 40px rgba(50, 130, 184, 0.3);
         }
 
         .experience-header {
@@ -170,6 +590,7 @@
 
         .experience-header h2 {
             font-size: 1.8rem;
+            font-family: var(--font-heading);
             color: var(--text-white);
             margin-bottom: 0.5rem;
         }
@@ -186,12 +607,30 @@
             color: var(--text-light);
             font-size: 0.95rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         .experience-meta span {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .experience-meta span:hover {
+            color: var(--text-white);
+            transform: translateY(-2px);
+        }
+
+        /* Animated icons */
+        .experience-meta span::before {
+            font-size: 1.2rem;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
         }
 
         .experience-description {
@@ -203,6 +642,24 @@
             color: var(--highlight-color);
             font-size: 1.1rem;
             margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .experience-highlights h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gradient-2);
+            animation: expandWidth 1s ease forwards;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 50px; }
         }
 
         .experience-highlights ul {
@@ -215,6 +672,14 @@
             padding-left: 2rem;
             margin-bottom: 0.8rem;
             line-height: 1.6;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .experience-highlights li.animate {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.5s ease;
         }
 
         .experience-highlights li::before {
@@ -223,8 +688,15 @@
             left: 0;
             color: var(--highlight-color);
             font-size: 1.2rem;
+            animation: arrowPulse 2s ease-in-out infinite;
         }
 
+        @keyframes arrowPulse {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* Animated skill tags */
         .skills-gained {
             margin-top: 1.5rem;
             display: flex;
@@ -239,40 +711,133 @@
             border-radius: 20px;
             font-size: 0.85rem;
             border: 1px solid rgba(50, 130, 184, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.8) rotate(-5deg);
         }
 
-        /* Stats Section */
-        .stats-section {
-            background: rgba(22, 33, 62, 0.3);
-            padding: 3rem;
-            border-radius: 15px;
-            margin-bottom: 4rem;
-            text-align: center;
+        .skill-tag.animate {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            animation: bounceIn 0.6s ease;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        @keyframes bounceIn {
+            0% { transform: scale(0.8) rotate(-5deg); }
+            50% { transform: scale(1.1) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); }
         }
 
-        .stat-item h3 {
-            font-size: 2.5rem;
+        .skill-tag:hover {
+            background: var(--highlight-color);
+            color: var(--text-white);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(50, 130, 184, 0.3);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(50, 130, 184, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(50, 130, 184, 0.5);
+        }
+
+        /* Expandable sections */
+        .expand-btn {
+            background: none;
+            border: none;
             color: var(--highlight-color);
-            margin-bottom: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .stat-item p {
-            color: var(--text-light);
+        .expand-btn:hover {
+            color: var(--text-white);
+            transform: translateX(5px);
         }
 
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 500px;
+        }
+
+        /* Tooltips */
+        .tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 46, 0.95);
+            color: var(--text-white);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tooltip-wrapper:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
+            .scroll-indicator {
+                display: none;
+            }
+
             .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-progress {
                 left: 20px;
             }
 
@@ -292,18 +857,80 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <ul>
+            <li>
+                <a href="#stats" data-section="stats">
+                    <span class="tooltip">Overview</span>
+                </a>
+            </li>
+            <li>
+                <a href="#voice" data-section="voice">
+                    <span class="tooltip">VOICE4PIMD</span>
+                </a>
+            </li>
+            <li>
+                <a href="#ocumap" data-section="ocumap">
+                    <span class="tooltip">OcuMap</span>
+                </a>
+            </li>
+            <li>
+                <a href="#teaching" data-section="teaching">
+                    <span class="tooltip">Teaching</span>
+                </a>
+            </li>
+            <li>
+                <a href="#fellowship" data-section="fellowship">
+                    <span class="tooltip">Fellowship</span>
+                </a>
+            </li>
+            <li>
+                <a href="#sports" data-section="sports">
+                    <span class="tooltip">Sports</span>
+                </a>
+            </li>
+            <li>
+                <a href="#data" data-section="data">
+                    <span class="tooltip">Technology</span>
+                </a>
+            </li>
+            <li>
+                <a href="#boxing" data-section="boxing">
+                    <span class="tooltip">Boxing</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">L.W.</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
-                <li><a href="certifications.html">Certifications</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
         </div>
@@ -311,29 +938,53 @@
 
     <!-- Page Header -->
     <header class="page-header">
-        <h1>Professional Experience</h1>
+        <h1 class="gradient-text">Professional Experience</h1>
         <p>A journey of continuous learning, leadership, and impact across technology and business domains</p>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
         <!-- Stats Overview -->
-        <section class="stats-section">
+        <section id="stats" class="stats-section">
             <div class="stats-grid">
                 <div class="stat-item">
+                    <div class="progress-circle">
+                        <svg>
+                            <circle class="bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="progress" cx="60" cy="60" r="54" data-value="100"></circle>
+                        </svg>
+                    </div>
                     <h3>4+</h3>
                     <p>Years of Leadership</p>
                 </div>
                 <div class="stat-item">
+                    <div class="progress-circle">
+                        <svg>
+                            <circle class="bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="progress" cx="60" cy="60" r="54" data-value="100"></circle>
+                        </svg>
+                    </div>
                     <h3>3</h3>
                     <p>Countries Worked In</p>
                 </div>
                 <div class="stat-item">
-                    <h3>70+</h3>
+                    <div class="progress-circle">
+                        <svg>
+                            <circle class="bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="progress" cx="60" cy="60" r="54" data-value="100"></circle>
+                        </svg>
+                    </div>
+                    <h3>200+</h3>
                     <p>Athletes Led</p>
                 </div>
                 <div class="stat-item">
-                    <h3>$100K+</h3>
+                    <div class="progress-circle">
+                        <svg>
+                            <circle class="bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="progress" cx="60" cy="60" r="54" data-value="100"></circle>
+                        </svg>
+                    </div>
+                    <h3>$100,000+</h3>
                     <p>Fundraised for Education</p>
                 </div>
             </div>
@@ -341,8 +992,79 @@
 
         <!-- Experience Timeline -->
         <div class="timeline">
+            <div class="timeline-progress" id="timelineProgress"></div>
+            
+            <!-- VOICE4PIMD -->
+            <div id="voice" class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h2>Audio Recognition Intern & Scrum Master</h2>
+                        <h3>Center for Research Computing – VOICE4PIMD Group</h3>
+                        <div class="experience-meta">
+                            <span>📅 June 2025 - Present</span>
+                            <span>📍 Notre Dame, IN</span>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <p>Leading the development of an innovative voice recognition system to help non-verbal patients with Profound Intellectual and Multiple Disabilities (PIMD) communicate effectively.</p>
+                    </div>
+                    <div class="experience-highlights">
+                        <h4>Key Responsibilities</h4>
+                        <ul>
+                            <li>Researched & analyzed 7 existing assistive voice technologies to guide product development for non-verbal patients with PIMD</li>
+                            <li>Designing & implementing a Python voice recognition model to classify 7000+ vocalizations from 8 patients into interpretable outputs</li>
+                            <li>Collaborating with stakeholders, like a caregiver of a PIMD patient, across 7 sessions to adapt technical solutions to real-world needs</li>
+                            <li>Serving as Scrum Master for a team of 6, leading daily standups & weekly sprint planning to coordinate interdisciplinary team efforts</li>
+                            <li>Translating weekly technical progress into 8+ clear, client-facing deliverables using Excel & PowerPoint</li>
+                        </ul>
+                    </div>
+                    <div class="skills-gained">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Voice Recognition</span>
+                        <span class="skill-tag">Stakeholder Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OcuMap -->
+            <div id="ocumap" class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h2>SaaS Analyst</h2>
+                        <h3>OcuMap</h3>
+                        <div class="experience-meta">
+                            <span>📅 June 2025 - Present</span>
+                            <span>📍 Remote</span>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <p>Conducting market research and competitive analysis to position OcuMap strategically in the road construction technology market.</p>
+                    </div>
+                    <div class="experience-highlights">
+                        <h4>Key Contributions</h4>
+                        <ul>
+                            <li>Researched the road construction industry to identify pain points in project documentation, quality control, & asset handover</li>
+                            <li>Analyzed 10+ manual & tech-based tools for mapping & documentation, identifying strategic feature & pricing gaps for OcuMap to fill</li>
+                            <li>Conducting targeted outreach to 1000+ road construction stakeholders to gather insights on documentation & asset management</li>
+                            <li>Synthesizing findings into 5+ deliverables, briefings, & competitive analysis reports to guide product positioning & development</li>
+                        </ul>
+                    </div>
+                    <div class="skills-gained">
+                        <span class="skill-tag">Market Research</span>
+                        <span class="skill-tag">Competitive Analysis</span>
+                        <span class="skill-tag">SaaS</span>
+                        <span class="skill-tag">Business Strategy</span>
+                        <span class="skill-tag">Stakeholder Outreach</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Teaching Assistant -->
-            <div class="timeline-item">
+            <div id="teaching" class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="experience-card">
                     <div class="experience-header">
@@ -351,7 +1073,6 @@
                         <div class="experience-meta">
                             <span>📅 August 2024 - Present</span>
                             <span>📍 Notre Dame, IN</span>
-                            <span>⏱️ 6 hours/week</span>
                         </div>
                     </div>
                     <div class="experience-description">
@@ -360,11 +1081,9 @@
                     <div class="experience-highlights">
                         <h4>Key Responsibilities</h4>
                         <ul>
-                            <li>Tutor students one-on-one and in groups on complex topics including pipeline processing, cache memory optimization, and instruction set architectures</li>
-                            <li>Assist professor with grading assignments and exams, ensuring fair and consistent evaluations while providing constructive feedback</li>
-                            <li>Hold regular office hours to offer personalized academic support and clarify complex coursework concepts</li>
-                            <li>Develop supplementary learning materials and practice problems to reinforce classroom concepts</li>
-                            <li>Guide students through challenging assignments and debugging processes</li>
+                            <li>Tutor 30+ students one-on-one & in groups of 3-4 in advanced topics such as pipeline processing, cache memory, & instruction set architectures</li>
+                            <li>Assist the professor with grading to ensure fair & consistent evaluations</li>
+                            <li>Hold 3 weekly office hours to offer personalized academic support, clarify complex coursework, & guide students through assignments</li>
                         </ul>
                     </div>
                     <div class="skills-gained">
@@ -378,29 +1097,26 @@
             </div>
 
             <!-- Summer Fellowship -->
-            <div class="timeline-item">
+            <div id="fellowship" class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="experience-card">
                     <div class="experience-header">
-                        <h2>Summer Fellowship Fellow</h2>
+                        <h2>Summer Fellow</h2>
                         <h3>Notre Dame Center for Social Concerns</h3>
                         <div class="experience-meta">
                             <span>📅 June 2024 - August 2024</span>
                             <span>📍 Kyarusozi, Uganda</span>
-                            <span>⏱️ 8-week program</span>
                         </div>
                     </div>
                     <div class="experience-description">
-                        <p>Immersive international experience focused on educational technology and STEM accessibility in under-resourced communities. Combined research, teaching, and community engagement to drive meaningful impact.</p>
+                        <p>Immersive international experience focused on educational technology and STEM accessibility in under-resourced communities.</p>
                     </div>
                     <div class="experience-highlights">
                         <h4>Key Achievements</h4>
                         <ul>
-                            <li>Conducted comprehensive research on effective STEM education methodologies, investigating innovative strategies to enhance accessibility and engagement</li>
-                            <li>Facilitated mathematics and ICT lessons for 100+ secondary school students, integrating research findings to improve learning outcomes</li>
-                            <li>Developed culturally-sensitive curriculum adaptations that increased student engagement by 40%</li>
-                            <li>Organized and coached extracurricular activities including boxing and team sports, fostering leadership and personal development</li>
-                            <li>Collaborated with local educators to implement sustainable teaching practices</li>
+                            <li>Researched 3 effective STEM education methods to enhance accessibility & engagement in under-resourced communities</li>
+                            <li>Facilitated Math & ICT lessons for 90+ students, applying research to improve learning outcomes & promote student STEM interest</li>
+                            <li>Organized & led extracurriculars, like boxing & team sports, fostering teamwork, leadership, & personal development for 30+ students</li>
                         </ul>
                     </div>
                     <div class="skills-gained">
@@ -414,7 +1130,7 @@
             </div>
 
             <!-- Sports Program Supervisor -->
-            <div class="timeline-item">
+            <div id="sports" class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="experience-card">
                     <div class="experience-header">
@@ -423,20 +1139,19 @@
                         <div class="experience-meta">
                             <span>📅 August 2023 - Present</span>
                             <span>📍 Notre Dame, IN</span>
-                            <span>⏱️ 7 hours/week</span>
+                            <span>⏱️ Manager on Duty starting August 2025</span>
                         </div>
                     </div>
                     <div class="experience-description">
-                        <p>Managing campus-wide sports programs while ensuring safety, fairness, and operational excellence. Promoted to Manager on Duty starting August 2025.</p>
+                        <p>Managing campus-wide sports programs while ensuring safety, fairness, and operational excellence.</p>
                     </div>
                     <div class="experience-highlights">
                         <h4>Responsibilities & Impact</h4>
                         <ul>
-                            <li>Supervise club and intramural sports activities across campus, managing 20+ events weekly</li>
-                            <li>Enforce safety policies and implement emergency response protocols, maintaining 100% safety record</li>
-                            <li>Coordinate with 15+ sports clubs to ensure smooth facility operations and scheduling</li>
-                            <li>Perform essential office tasks including data management, participant tracking, and equipment inventory</li>
-                            <li>Train and mentor new staff members on safety procedures and customer service</li>
+                            <li>Supervise 7 club & 8 intramural sports, promoting fair play & sportsmanship among participants while ensuring proper facility setup</li>
+                            <li>Enforce safety policies & implement emergency response protocols to maintain a secure environment during all sporting events</li>
+                            <li>Perform essential office tasks, like data entry, participant updates, & preparing equipment & materials needed for upcoming events</li>
+                            <li>Set to begin MOD role, overseeing Sports Programs operations & leading shift coverage across RecSports 8+ facilities</li>
                         </ul>
                     </div>
                     <div class="skills-gained">
@@ -449,17 +1164,16 @@
                 </div>
             </div>
 
-            <!-- Data Analysis Intern -->
-            <div class="timeline-item">
+            <!-- Technology & Operations Intern -->
+            <div id="data" class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="experience-card">
                     <div class="experience-header">
-                        <h2>Data Analysis & Computer Vision Intern</h2>
+                        <h2>Technology & Operations Intern</h2>
                         <h3>Nafith Logistics International</h3>
                         <div class="experience-meta">
-                            <span>📅 June 2023</span>
+                            <span>📅 May 2023 - June 2023</span>
                             <span>📍 Amman, Jordan</span>
-                            <span>⏱️ 40 hours/week</span>
                         </div>
                     </div>
                     <div class="experience-description">
@@ -468,49 +1182,49 @@
                     <div class="experience-highlights">
                         <h4>Technical Contributions</h4>
                         <ul>
-                            <li>Cleansed and analyzed 6-month dataset in Excel, identifying key operational inefficiencies</li>
-                            <li>Developed comprehensive analysis reports using Visme, presenting findings to senior management</li>
-                            <li>Created detailed flowchart diagrams in Microsoft Visio to visualize and optimize workflow processes</li>
-                            <li>Implemented moving object detection system using Python and OpenCV, applying background subtraction, noise reduction, and optical flow algorithms</li>
-                            <li>Improved cargo tracking accuracy by 85% through computer vision implementation</li>
+                            <li>Applied motion detection algorithms in Python, like optical flow & edge detection, to analyze video data & support logistics monitoring</li>
+                            <li>Cleansed a 6-month dataset in Excel & co-developed a visual analysis report in Visme for presentation to senior supervisors</li>
+                            <li>Created 8 flowcharts in Microsoft Visio to map & analyze the key processes & workflows for ongoing logistics projects</li>
                         </ul>
                     </div>
                     <div class="skills-gained">
                         <span class="skill-tag">Python</span>
-                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">Computer Vision</span>
                         <span class="skill-tag">Data Analysis</span>
                         <span class="skill-tag">Excel</span>
-                        <span class="skill-tag">Business Intelligence</span>
                         <span class="skill-tag">Process Optimization</span>
                     </div>
                 </div>
             </div>
 
             <!-- Baraka Bouts Leadership -->
-            <div class="timeline-item">
+            <div id="boxing" class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="experience-card">
                     <div class="experience-header">
                         <h2>President & Captain</h2>
                         <h3>Baraka Bouts Women's Boxing Club</h3>
                         <div class="experience-meta">
-                            <span>📅 September 2022 - Present</span>
+                            <span>📅 August 2022 - Present</span>
                             <span>📍 Notre Dame, IN</span>
-                            <span>⏱️ 20 hours/week</span>
+                            <span>⏱️ President: April 2025 - Present</span>
+                            <span>⏱️ Captain: January 2024 - Present</span>
                         </div>
                     </div>
                     <div class="experience-description">
                         <p>Leading one of Notre Dame's most impactful student organizations, combining athletic excellence with philanthropic mission to support education in Uganda.</p>
                     </div>
                     <div class="experience-highlights">
-                        <h4>Leadership & Impact</h4>
+                        <h4>President (April 2025 - Present)</h4>
                         <ul>
-                            <li>Lead daily practices for 70+ athletes, developing training programs that improved overall team performance by 30%</li>
-                            <li>Commit 15+ hours weekly to rigorous training while maintaining 3.71 GPA in Computer Engineering</li>
-                            <li>Spearhead planning and execution of annual Baraka Bouts Tournament, managing logistics for 200+ attendees</li>
-                            <li>Drive fundraising initiatives contributing to $100,000+ annual goal for Holy Cross Mission Schools</li>
-                            <li>Coordinate with head coach and captains to evaluate progress and strategize for team development</li>
-                            <li>Mentor new members, fostering inclusive environment and 90% retention rate</li>
+                            <li>Leading summer planning in collaboration with the head coach & 8 team captains to restructure the season's practice structure</li>
+                            <li>Spearhead the planning & execution of the annual Baraka Bouts Tournament, overseeing logistics, safety, & event promotion, contributing to the club's fundraising goal of $100,000+ for Holy Cross Mission Schools in Uganda</li>
+                            <li>Developing & implementing recruitment strategies to boost new-boxer signups by 20% & improve first-year engagement across campus</li>
+                        </ul>
+                        <h4>Captain (January 2024 - Present)</h4>
+                        <ul>
+                            <li>Commit 15+ hours weekly to rigorous training & several additional hours for planning weekly workout routines, collaborating with the head coach & fellow captains to evaluate progress & strategize for upcoming sessions & club goals</li>
+                            <li>Lead daily practices for 70+ athletes, coordinating drills, technique training, & strength conditioning, while fostering a positive, results-driven team environment</li>
                         </ul>
                     </div>
                     <div class="skills-gained">
@@ -526,28 +1240,177 @@
         </div>
     </main>
 
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
     <script>
-        // Add scroll animations
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Timeline progress
+        const updateTimelineProgress = () => {
+            const timeline = document.querySelector('.timeline');
+            const timelineProgress = document.getElementById('timelineProgress');
+            const timelineRect = timeline.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            const scrolled = Math.max(0, Math.min(1, (windowHeight - timelineRect.top) / (timelineRect.height + windowHeight)));
+            timelineProgress.style.transform = `scaleY(${scrolled})`;
+            timelineProgress.style.height = timeline.offsetHeight + 'px';
+        };
+
+        window.addEventListener('scroll', updateTimelineProgress);
+        window.addEventListener('resize', updateTimelineProgress);
+
+        // Scroll indicator active state
+        const sections = document.querySelectorAll('.timeline-item, .stats-section');
+        const scrollIndicatorLinks = document.querySelectorAll('.scroll-indicator a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            scrollIndicatorLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update timeline dots
+            document.querySelectorAll('.timeline-dot').forEach((dot, index) => {
+                const item = dot.parentElement;
+                const itemTop = item.offsetTop;
+                if (window.scrollY >= itemTop - 200) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateX(0)';
+                    // Animate timeline items
+                    if (entry.target.classList.contains('timeline-item')) {
+                        setTimeout(() => {
+                            const itemIndex = Array.from(document.querySelectorAll('.timeline-item')).indexOf(entry.target);
+                            entry.target.classList.add(itemIndex % 2 === 0 ? 'animate-left' : 'animate-right');
+                        }, index * 100);
+                    }
+
+                    // Animate stat items
+                    if (entry.target.classList.contains('stat-item')) {
+                        entry.target.classList.add('animate');
+                        
+                        // Animate progress circles
+                        const progressCircle = entry.target.querySelector('.progress-circle .progress');
+                        if (progressCircle) {
+                            const value = progressCircle.getAttribute('data-value');
+                            const circumference = 2 * Math.PI * 54;
+                            const offset = circumference - (value / 100) * circumference;
+                            progressCircle.style.strokeDashoffset = offset;
+                        }
+                    }
+
+                    // Animate list items
+                    const listItems = entry.target.querySelectorAll('.experience-highlights li');
+                    listItems.forEach((item, i) => {
+                        setTimeout(() => {
+                            item.classList.add('animate');
+                        }, i * 100);
+                    });
+
+                    // Animate skill tags
+                    const skillTags = entry.target.querySelectorAll('.skill-tag');
+                    skillTags.forEach((tag, i) => {
+                        setTimeout(() => {
+                            tag.classList.add('animate');
+                        }, i * 50);
+                    });
+
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.experience-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateX(-20px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
+        // Observe elements
+        document.querySelectorAll('.timeline-item, .stat-item').forEach(el => {
+            observer.observe(el);
         });
+
+        // Expand/collapse functionality
+        document.querySelectorAll('.expand-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                content.classList.toggle('expanded');
+                btn.querySelector('span:last-child').textContent = content.classList.contains('expanded') ? '▲' : '▼';
+                btn.querySelector('span:first-child').textContent = content.classList.contains('expanded') ? 'Show Less' : 'Show More Details';
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize
+        updateTimelineProgress();
     </script>
 </body>
 </html>

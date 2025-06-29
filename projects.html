@@ -35,6 +35,17 @@
             --font-mono: 'JetBrains Mono', 'Courier New', monospace;
         }
 
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-2);
+            z-index: 10001;
+            transition: width 0.3s ease;
+        }
+
         /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
@@ -599,6 +610,9 @@
     </style>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
     <!-- Loader -->
     <div class="loader" id="loader">
         <div class="loader-inner"></div>
@@ -1417,6 +1431,13 @@ Command: a 2 0
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
     <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
         // Loader
         window.addEventListener('load', () => {
             setTimeout(() => {
