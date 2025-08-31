@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Layann Wardeh - Hackers in the Bazaar Blog</title>
+    <subtitle>Weekly reflections on hacker culture, open source development, and the journey through CSE 40842</subtitle>
+    <link href="https://layannwardeh.com/blog" rel="alternate" type="text/html"/>
+    <link href="https://layannwardeh.com/feed.xml" rel="self" type="application/atom+xml"/>
+    <updated>2025-08-26T00:00:00Z</updated>
+    <id>https://layannwardeh.com/blog</id>
+    <author>
+        <name>Layann Wardeh</name>
+        <email>lwardeh@nd.edu</email>
+    </author>
+
+    <!-- Reading 01 Entry - Update with your actual content when published -->
+    <entry>
+        <title>Reading 01: Cambridge - The Fifties and Sixties</title>
+        <link href="https://layannwardeh.com/blog#reading-01"/>
+        <updated>2025-08-31T23:59:59Z</updated>
+        <published>2025-08-31T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-01</id>
+        <summary>First reflection on Steven Levy's exploration of early hacker culture at MIT and the origins of the hacker ethic.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 01: Cambridge - The Fifties and Sixties</h2>
+            <p><em>Content will be updated when the reflection is published...</em></p>
+            <p>This reflection explores Steven Levy's account of the MIT Tech Model Railroad Club and the birth of hacker culture in the 1950s and 1960s.</p>
+        ]]></content>
+        <category term="MIT TMRC"/>
+        <category term="Hacker Origins"/>
+        <category term="Computing History"/>
+        <category term="Information Freedom"/>
+        <category term="Hacker Ethic"/>
+    </entry>
+
+    <!-- Template for Reading 02 - Copy and modify when ready -->
+    <!--
+    <entry>
+        <title>Reading 02: Northern California - The Seventies</title>
+        <link href="https://layannwardeh.com/blog#reading-02"/>
+        <updated>2025-09-07T23:59:59Z</updated>
+        <published>2025-09-07T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-02</id>
+        <summary>Reflection on the hardware hackers and the personal computer revolution.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 02: Northern California - The Seventies</h2>
+            <p>Your reflection content goes here...</p>
+        ]]></content>
+        <category term="Hardware Hackers"/>
+        <category term="Personal Computing"/>
+        <category term="Homebrew Computer Club"/>
+    </entry>
+    -->
+
+    <!-- Template for Reading 03 - Copy and modify when ready -->
+    <!--
+    <entry>
+        <title>Reading 03: The Sierras - The Eighties</title>
+        <link href="https://layannwardeh.com/blog#reading-03"/>
+        <updated>2025-09-14T23:59:59Z</updated>
+        <published>2025-09-14T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-03</id>
+        <summary>Exploring the game hackers and the commercialization of hacker culture.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 03: The Sierras - The Eighties</h2>
+            <p>Your reflection content goes here...</p>
+        ]]></content>
+        <category term="Game Hackers"/>
+        <category term="Commercialization"/>
+        <category term="Sierra On-Line"/>
+    </entry>
+    -->
+
+    <!-- Template for future readings - uncomment and modify as needed -->
+    <!--
+    <entry>
+        <title>Reading 04: Hackers and Painters</title>
+        <link href="https://layannwardeh.com/blog#reading-04"/>
+        <updated>2025-09-28T23:59:59Z</updated>
+        <published>2025-09-28T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-04</id>
+        <summary>Paul Graham's perspectives on creativity, nerds, and the nature of programming.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 04: Hackers and Painters</h2>
+            <p>Your reflection content goes here...</p>
+        ]]></content>
+        <category term="Paul Graham"/>
+        <category term="Creativity"/>
+        <category term="Programming Philosophy"/>
+    </entry>
+    -->
+</feed>
