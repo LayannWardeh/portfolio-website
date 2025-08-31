@@ -11,7 +11,7 @@
         <email>lwardeh@nd.edu</email>
     </author>
 
-    <!-- Reading 01 Entry - Update with your actual content when published -->
+    <!-- Reading 01 Entry -->
     <entry>
         <title>Reading 01: Cambridge - The Fifties and Sixties</title>
         <link href="https://layannwardeh.com/blog#reading-01"/>
@@ -30,61 +30,4 @@
         <category term="Information Freedom"/>
         <category term="Hacker Ethic"/>
     </entry>
-
-    <!-- Template for Reading 02 - Copy and modify when ready -->
-    <!--
-    <entry>
-        <title>Reading 02: Northern California - The Seventies</title>
-        <link href="https://layannwardeh.com/blog#reading-02"/>
-        <updated>2025-09-07T23:59:59Z</updated>
-        <published>2025-09-07T23:59:59Z</published>
-        <id>https://layannwardeh.com/blog#reading-02</id>
-        <summary>Reflection on the hardware hackers and the personal computer revolution.</summary>
-        <content type="html"><![CDATA[
-            <h2>Reading 02: Northern California - The Seventies</h2>
-            <p>Your reflection content goes here...</p>
-        ]]></content>
-        <category term="Hardware Hackers"/>
-        <category term="Personal Computing"/>
-        <category term="Homebrew Computer Club"/>
-    </entry>
-    -->
-
-    <!-- Template for Reading 03 - Copy and modify when ready -->
-    <!--
-    <entry>
-        <title>Reading 03: The Sierras - The Eighties</title>
-        <link href="https://layannwardeh.com/blog#reading-03"/>
-        <updated>2025-09-14T23:59:59Z</updated>
-        <published>2025-09-14T23:59:59Z</published>
-        <id>https://layannwardeh.com/blog#reading-03</id>
-        <summary>Exploring the game hackers and the commercialization of hacker culture.</summary>
-        <content type="html"><![CDATA[
-            <h2>Reading 03: The Sierras - The Eighties</h2>
-            <p>Your reflection content goes here...</p>
-        ]]></content>
-        <category term="Game Hackers"/>
-        <category term="Commercialization"/>
-        <category term="Sierra On-Line"/>
-    </entry>
-    -->
-
-    <!-- Template for future readings - uncomment and modify as needed -->
-    <!--
-    <entry>
-        <title>Reading 04: Hackers and Painters</title>
-        <link href="https://layannwardeh.com/blog#reading-04"/>
-        <updated>2025-09-28T23:59:59Z</updated>
-        <published>2025-09-28T23:59:59Z</published>
-        <id>https://layannwardeh.com/blog#reading-04</id>
-        <summary>Paul Graham's perspectives on creativity, nerds, and the nature of programming.</summary>
-        <content type="html"><![CDATA[
-            <h2>Reading 04: Hackers and Painters</h2>
-            <p>Your reflection content goes here...</p>
-        ]]></content>
-        <category term="Paul Graham"/>
-        <category term="Creativity"/>
-        <category term="Programming Philosophy"/>
-    </entry>
-    -->
 </feed>
