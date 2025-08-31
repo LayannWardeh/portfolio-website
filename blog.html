@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Layann Wardeh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f4c75;
+            --highlight-color: #3282b8;
+            --text-light: #bbe1fa;
+            --text-white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #0f4c75 100%);
+            --gradient-2: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            --accent-glow: rgba(50, 130, 184, 0.5);
+            --border-color: rgba(50, 130, 184, 0.2);
+            --card-bg: rgba(22, 33, 62, 0.3);
+            --card-hover: rgba(22, 33, 62, 0.5);
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-2);
+            z-index: 10001;
+            transition: width 0.3s ease;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: #0a0a0a;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(50, 130, 184, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(15, 76, 117, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(50, 130, 184, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 100%;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            color: var(--text-white);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            width: 30px;
+            height: 25px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1002;
+            display: none;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--text-white);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 11px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 22px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 11px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 11px;
+        }
+
+        /* Menu Dropdown */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: rgba(26, 26, 46, 0.98);
+            backdrop-filter: blur(20px);
+            transition: right 0.3s ease;
+            padding: 100px 2rem 2rem;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-white);
+        }
+
+        .nav-links a.active {
+            color: var(--highlight-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-1);
+            padding: 10rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.2; }
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            color: var(--text-white);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        /* Blog Post */
+        .blog-post {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .blog-post:nth-child(2) { animation-delay: 0.1s; }
+        .blog-post:nth-child(3) { animation-delay: 0.2s; }
+        .blog-post:nth-child(4) { animation-delay: 0.3s; }
+
+        .blog-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--highlight-color), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .blog-post:hover::before {
+            transform: translateX(100%);
+        }
+
+        .blog-post:hover {
+            background: var(--card-hover);
+            border-color: var(--highlight-color);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(50, 130, 184, 0.3);
+        }
+
+        /* Blog Header */
+        .blog-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .blog-week {
+            background: var(--gradient-2);
+            color: var(--text-white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .blog-title {
+            font-size: 2.2rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-reading {
+            background: rgba(50, 130, 184, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            color: var(--highlight-color);
+        }
+
+        /* Blog Content */
+        .blog-content {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .blog-content h3 {
+            color: var(--highlight-color);
+            font-size: 1.4rem;
+            font-family: var(--font-heading);
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content blockquote {
+            border-left: 4px solid var(--highlight-color);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .blog-content strong {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        .blog-content em {
+            color: var(--highlight-color);
+            font-style: italic;
+        }
+
+        /* Tags */
+        .blog-tags {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .blog-tags h4 {
+            color: var(--text-white);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(50, 130, 184, 0.2);
+            color: var(--highlight-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(50, 130, 184, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(50, 130, 184, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Blog Stats */
+        .blog-stats {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            font-family: var(--font-mono);
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Coming Soon Posts */
+        .coming-soon {
+            background: rgba(50, 130, 184, 0.1);
+            border: 1px dashed var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0.7;
+        }
+
+        .coming-soon h3 {
+            color: var(--text-white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gradient-2);
+            color: var(--text-white);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 30px var(--accent-glow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            font-size: 1.25rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px var(--accent-glow);
+        }
+
+        /* Reading Schedule Section */
+        .reading-schedule {
+            margin-bottom: 4rem;
+        }
+
+        .reading-schedule h2 {
+            font-size: 2.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .reading-schedule > p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Books Grid */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .book-card:hover {
+            background: var(--card-hover);
+            border-color: var(--highlight-color);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(50, 130, 184, 0.2);
+        }
+
+        .book-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .book-header h3 {
+            font-size: 1.4rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .book-header p {
+            font-size: 1rem;
+            color: var(--highlight-color);
+            margin-bottom: 1rem;
+        }
+
+        .book-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .book-status.current {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.4);
+        }
+
+        .book-status.upcoming {
+            background: rgba(255, 152, 0, 0.2);
+            color: #ff9800;
+            border: 1px solid rgba(255, 152, 0, 0.4);
+        }
+
+        /* Writings List */
+        .writings-list {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .writing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(50, 130, 184, 0.1);
+            transition: all 0.3s ease;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .writing-item:last-child {
+            border-bottom: none;
+        }
+
+        .writing-item:hover {
+            background: rgba(50, 130, 184, 0.05);
+            transform: translateX(5px);
+        }
+
+        .writing-item.upcoming {
+            opacity: 0.6;
+        }
+
+        .writing-number {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--highlight-color);
+            font-size: 0.9rem;
+            min-width: 80px;
+        }
+
+        .writing-topic {
+            flex: 1;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .writing-status {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .writing-status.in-progress {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196f3;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .writing-status:not(.in-progress) {
+            background: rgba(156, 39, 176, 0.2);
+            color: #9c27b0;
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+
+        .writing-topic a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .writing-topic a:hover {
+            color: var(--highlight-color);
+            text-decoration: none;
+        }
+
+        .writing-item.upcoming .writing-topic a {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Blog Posts Section */
+        .blog-posts {
+            margin-top: 4rem;
+        }
+
+        .blog-posts h2 {
+            font-size: 2.2rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-white);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .blog-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Word count indicator */
+        .word-count {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .blog-post {
+                padding: 2rem;
+            }
+
+            .blog-title {
+                font-size: 1.8rem;
+            }
+
+            .blog-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .writing-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .writing-number {
+                min-width: auto;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-inner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--highlight-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-inner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">L.W.</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="experience.html">Experience</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Reflections Blog</h1>
+        <p>Weekly reflections on hacker culture, technology ethics, and the journey of understanding what it means to be a "True Hacker"</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Blog Stats -->
+        <div class="blog-stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10</h3>
+                    <p>Reading Assignments</p>
+                </div>
+                <div class="stat-item">
+                    <h3>4</h3>
+                    <p>Books to Explore</p>
+                </div>
+                <div class="stat-item">
+                    <h3>1</h3>
+                    <p>Current Reading</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Reading Schedule -->
+        <section class="reading-schedule">
+            <h2>CSE 40842: Hackers in the Bazaar</h2>
+            <p>Weekly reflections on the history and culture of hackers through seminal texts in computer science and open source development.</p>
+            
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-header">
+                        <h3>Book 1: Hackers - Heroes of the Computer Revolution</h3>
+                        <p>Steven Levy</p>
+                        <span class="book-status current">Current Reading</span>
+                    </div>
+                    <div class="writings-list">
+                        <div class="writing-item">
+                            <span class="writing-number">Reading 01</span>
+                            <span class="writing-topic"><a href="#reading-01">Cambridge: The Fifties and Sixties</a></span>
+                            <span class="writing-status in-progress">In Progress</span>
+                        </div>
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 02</span>
+                            <span class="writing-topic"><a href="#reading-02">Northern California: The Seventies</a></span>
+                            <span class="writing-status">Coming Soon</span>
+                        </div>
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 03</span>
+                            <span class="writing-topic"><a href="#reading-03">The Sierras: The Eighties</a></span>
+                            <span class="writing-status">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-header">
+                        <h3>Book 2: Hackers and Painters</h3>
+                        <p>Paul Graham</p>
+                        <span class="book-status upcoming">Upcoming</span>
+                    </div>
+                    <div class="writings-list">
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 04</span>
+                            <span class="writing-topic"><a href="#reading-04">Why Nerds Are Unpopular & Creative Expression</a></span>
+                            <span class="writing-status">Sept 2025</span>
+                        </div>
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 05</span>
+                            <span class="writing-topic"><a href="#reading-05">Programming Languages & Innovation</a></span>
+                            <span class="writing-status">Oct 2025</span>
+                        </div>
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 06</span>
+                            <span class="writing-topic"><a href="#reading-06">Wealth Creation & Entrepreneurship</a></span>
+                            <span class="writing-status">Oct 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-header">
+                        <h3>Book 3: The Cathedral and The Bazaar</h3>
+                        <p>Eric Raymond</p>
+                        <span class="book-status upcoming">Upcoming</span>
+                    </div>
+                    <div class="writings-list">
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 07</span>
+                            <span class="writing-topic"><a href="#reading-07">Hacker History & Development Models</a></span>
+                            <span class="writing-status">Nov 2025</span>
+                        </div>
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 08</span>
+                            <span class="writing-topic"><a href="#reading-08">Open Source Economics</a></span>
+                            <span class="writing-status">Nov 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-header">
+                        <h3>Book 4: Just for Fun</h3>
+                        <p>Linus Torvalds & David Diamond</p>
+                        <span class="book-status upcoming">Upcoming</span>
+                    </div>
+                    <div class="writings-list">
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 09</span>
+                            <span class="writing-topic"><a href="#reading-09">Birth of Linux & Open Source Revolution</a></span>
+                            <span class="writing-status">Nov 2025</span>
+                        </div>
+                        <div class="writing-item upcoming">
+                            <span class="writing-number">Reading 10</span>
+                            <span class="writing-topic"><a href="#reading-10">Leading Open Source Communities</a></span>
+                            <span class="writing-status">Nov 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Posts will appear here as they are written -->
+        <section class="blog-posts">
+            <h2>Weekly Reflections</h2>
+            <p class="blog-intro">Individual reflections on the readings will appear here as they are completed throughout the semester. Each post will explore the themes, ideas, and personal insights from the assigned materials.</p>
+            
+            <!-- Reading 01 - Add your actual blog post here -->
+            <article id="reading-01" class="blog-post">
+                <div class="blog-header">
+                    <div class="blog-week">Reading 01</div>
+                    <h2 class="blog-title">Cambridge: The Fifties and Sixties</h2>
+                    <div class="blog-meta">
+                        <span>📅 Due: August 31, 2025</span>
+                        <span class="word-count">500-1000 words</span>
+                        <span class="blog-reading">Hackers Ch. 1-2</span>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <!-- Your reflection content will go here -->
+                    <p><em>In progress...</em></p>
+                </div>
+                <div class="blog-tags">
+                    <h4>Topics:</h4>
+                    <div class="tag-list">
+                        <span class="tag">MIT TMRC</span>
+                        <span class="tag">Hacker Origins</span>
+                        <span class="tag">Computing History</span>
+                        <span class="tag">Information Freedom</span>
+                        <span class="tag">Hacker Ethic</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Placeholders for future readings -->
+            <div id="reading-02" class="coming-soon">
+                <h3>Reading 02: Northern California - The Seventies</h3>
+                <p>Reflection on the hardware hackers and the personal computer revolution.</p>
+                <small>Due: Sunday, September 7, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-03" class="coming-soon">
+                <h3>Reading 03: The Sierras - The Eighties</h3>
+                <p>Exploring the game hackers and the commercialization of hacker culture.</p>
+                <small>Due: Sunday, September 14, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-04" class="coming-soon">
+                <h3>Reading 04: Hackers and Painters</h3>
+                <p>Paul Graham's perspectives on creativity, nerds, and the nature of programming.</p>
+                <small>Due: Sunday, September 28, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-05" class="coming-soon">
+                <h3>Reading 05: Programming Languages & Innovation</h3>
+                <p>Analysis of language choice, the hundred-year language, and technological advantages.</p>
+                <small>Due: Sunday, October 5, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-06" class="coming-soon">
+                <h3>Reading 06: Wealth Creation & Entrepreneurship</h3>
+                <p>Graham's thoughts on wealth creation, stubbornness, and following your passion.</p>
+                <small>Due: Sunday, October 12, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-07" class="coming-soon">
+                <h3>Reading 07: Cathedral vs Bazaar</h3>
+                <p>Eric Raymond's seminal work on open source development models.</p>
+                <small>Due: Sunday, November 2, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-08" class="coming-soon">
+                <h3>Reading 08: Open Source Economics</h3>
+                <p>The economics of open source and the magic cauldron of collaboration.</p>
+                <small>Due: Sunday, November 9, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-09" class="coming-soon">
+                <h3>Reading 09: Birth of Linux</h3>
+                <p>Linus Torvalds' story and the accidental revolution of Linux.</p>
+                <small>Due: Sunday, November 16, 2025 at midnight</small>
+            </div>
+
+            <div id="reading-10" class="coming-soon">
+                <h3>Reading 10: Leading Communities</h3>
+                <p>Lessons on leadership and managing open source communities.</p>
+                <small>Due: Sunday, November 23, 2025 at midnight</small>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to top button functionality
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe blog posts
+        document.querySelectorAll('.blog-post').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic word count update (for demonstration)
+        document.querySelectorAll('.word-count').forEach(counter => {
+            const text = counter.closest('.blog-post').querySelector('.blog-content').textContent;
+            const wordCount = text.trim().split(/\s+/).length;
+            counter.textContent = `${wordCount} words`;
+        });
+    </script>
+</body>
+</html>
