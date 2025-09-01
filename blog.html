@@ -689,6 +689,12 @@
             font-weight: 500;
         }
 
+        .writing-status.done {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.4);
+        }
+
         .writing-status.in-progress {
             background: rgba(33, 150, 243, 0.2);
             color: #2196f3;
@@ -716,6 +722,129 @@
             opacity: 0.6;
             cursor: not-allowed;
             pointer-events: none;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 0;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 800px;
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 0;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--highlight-color) transparent;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--highlight-color);
+            border-radius: 3px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            transform: rotate(90deg);
+        }
+
+        .modal-blog-post {
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .modal-blog-post .blog-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .coming-soon-modal {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+        }
+
+        .coming-soon-modal h3 {
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .coming-soon-modal p {
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: 1rem;
         }
 
         /* Blog Posts Section */
@@ -911,17 +1040,17 @@
                     <div class="writings-list">
                         <div class="writing-item">
                             <span class="writing-number">Reading 01</span>
-                            <span class="writing-topic"><a href="#reading-01">Cambridge: The Fifties and Sixties</a></span>
-                            <span class="writing-status in-progress">In Progress</span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-01')">Cambridge: The Fifties and Sixties</a></span>
+                            <span class="writing-status done">Done</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 02</span>
-                            <span class="writing-topic"><a href="#reading-02">Northern California: The Seventies</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-02')">Northern California: The Seventies</a></span>
                             <span class="writing-status">Coming Soon</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 03</span>
-                            <span class="writing-topic"><a href="#reading-03">The Sierras: The Eighties</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-03')">The Sierras: The Eighties</a></span>
                             <span class="writing-status">Coming Soon</span>
                         </div>
                     </div>
@@ -936,17 +1065,17 @@
                     <div class="writings-list">
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 04</span>
-                            <span class="writing-topic"><a href="#reading-04">Why Nerds Are Unpopular & Creative Expression</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-04')">Why Nerds Are Unpopular & Creative Expression</a></span>
                             <span class="writing-status">Sept 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 05</span>
-                            <span class="writing-topic"><a href="#reading-05">Programming Languages & Innovation</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-05')">Programming Languages & Innovation</a></span>
                             <span class="writing-status">Oct 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 06</span>
-                            <span class="writing-topic"><a href="#reading-06">Wealth Creation & Entrepreneurship</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-06')">Wealth Creation & Entrepreneurship</a></span>
                             <span class="writing-status">Oct 2025</span>
                         </div>
                     </div>
@@ -961,12 +1090,12 @@
                     <div class="writings-list">
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 07</span>
-                            <span class="writing-topic"><a href="#reading-07">Hacker History & Development Models</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-07')">Hacker History & Development Models</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 08</span>
-                            <span class="writing-topic"><a href="#reading-08">Open Source Economics</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-08')">Open Source Economics</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                     </div>
@@ -981,12 +1110,12 @@
                     <div class="writings-list">
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 09</span>
-                            <span class="writing-topic"><a href="#reading-09">Birth of Linux & Open Source Revolution</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-09')">Birth of Linux & Open Source Revolution</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 10</span>
-                            <span class="writing-topic"><a href="#reading-10">Leading Open Source Communities</a></span>
+                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-10')">Leading Open Source Communities</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                     </div>
@@ -999,28 +1128,56 @@
             <h2>Weekly Reflections</h2>
             <p class="blog-intro">Individual reflections on the readings will appear here as they are completed throughout the semester. Each post will explore the themes, ideas, and personal insights from the assigned materials.</p>
             
-            <!-- Reading 01 - Add your actual blog post here -->
+            <!-- Reading 01 - Your actual blog post -->
             <article id="reading-01" class="blog-post">
                 <div class="blog-header">
                     <div class="blog-week">Reading 01</div>
                     <h2 class="blog-title">Cambridge: The Fifties and Sixties</h2>
                     <div class="blog-meta">
-                        <span>📅 Due: August 31, 2025</span>
-                        <span class="word-count">500-1000 words</span>
-                        <span class="blog-reading">Hackers Ch. 1-2</span>
+                        <span>📅 August 31, 2025</span>
+                        <span class="word-count">846 words</span>
+                        <span class="blog-reading">Hackers Part One</span>
                     </div>
                 </div>
                 <div class="blog-content">
-                    <!-- Your reflection content will go here -->
-                    <p><em>Your Reading 01 reflection will be added here once completed...</em></p>
+                    <p>For my first blog, I'd like to start by making a comparison between the setting of the first book we are reading, <em>Hackers: Heroes of the Computer Revolution</em>, and the CSE student life at Notre Dame. Throughout reading, whenever the author mentioned Building 26 and the EAM room, I envisioned Fitzpatrick Hall of Engineering and the basement room B19, where CSE students, specifically CPEGS, spend their late nights studying.</p>
+
+                    <p>The author mentioned hackers working "in the basement of this building void of personality, the EAM room." The author also writes, "where [Peter] would wander the hallways at two o'clock in the morning […] he would discover a computer that he would play with." I am not sure about you, but those lines scream Fitzpatrick ("building void of personality"), B19 room ("in the basement" and "the EAM room"), and the hallways students walk through in the middle of the night ("wander the hallways at two o'clock in the morning"). I am also wondering if Prof. Bui loved this book so much because one of the main characters is also named Bui 🤔 But now that I have brought this book to reality and now that I have brought it to Notre Dame, it may be easier to reflect on.</p>
+
+                    <h3>The Hacker Mindset: Hands-On Learning</h3>
+
+                    <p>As I read through the chapters, I noticed that the early chapters, specifically the first chapter, set the stage for what being a hacker really means. It described the work Peter Samson did and the mindset that drove him. Through these descriptions and the rules of what it means to be a hacker, I have noted a couple of important takeaways.</p>
+
+                    <p>In the early chapters, the author writes, <strong>"Peter Samson and his friends had grown up with a specific relationship to the world, wherein devices had meaning only if you found out how they worked. And how would you go about that if not by getting your hands on them?"</strong> This quote defines one of the main qualities of a hacker. It defines a hacker as someone who doesn't go about their day only experiencing it through a third-view point-of-view. Rather, a hacker goes about their day by digging deeper into the objects around them. That act of digging deeper is what gave meaning to the world and the projects they worked on.</p>
+
+                    <p>In our class discussion, we discussed how learning happens when there is a hands-on experience. However, I think our discussion lacked clarity on which activities we like to get our hands on to do the work. While our conversation focused on a lot of computer-specific experiences or projects we worked on, I feel that this quality of a hacker extends beyond computers.</p>
+
+                    <h3>The Tension Between Academic Achievement and True Learning</h3>
+
+                    <p>Additionally, in the early chapters, the author talks about the many obstacles to learning that already exist, and mentions that to Samson, the quest of hacking meant more than a degree and more than bothering with trivial matters like teachers and grades. We touched on this during our class discussion and mentioned the difference between that and the way a Notre Dame student perceives their education.</p>
+
+                    <p>In part, I believe what differentiates Samson from many students, and not necessarily just Notre Dame students, is his drive to learn new skills and to create innovations. What set Samson apart from his peers is this carelessness he had toward his in-class education because he saw something greater, more rewarding, and with greater output. Samson's attitude reminds me of a friend, who I will name H, from back home. He is enrolled in a university in Jordan where he studies software engineering. Since high school, H always made the coolest video games and music. At university, he continues to do the same and is now entering competitions and winning. In both high school and university, H never had a drive to perform well in class; however, when you look at what he does outside of the classroom, you'd be surprised by the projects he develops.</p>
+
+                    <p>Additionally, in class, Professor Bui asked us why we aren't the same… why we aren't careless and do what we want not for a grade but for the purpose of being hackers. This had me reflect on my school life and experiences. Looking at the household I grew up in, education and getting a degree is one of the most important aspects of life (besides family and health). And with this comes the chase of grades and a high GPA. So, in a sense, there isn't much freedom when it comes to chasing a hack but rather the must to chase a grade.</p>
+
+                    <h3>Finding Your Hack Beyond the Classroom</h3>
+
+                    <p>Outside of school, however, there is a chance to become a true hacker, whether that is through a sport or other creative outlets. From a young age, I have always been interested in martial arts, being a taekwondo player for almost 14 years and then becoming a boxer during university. Apart from sports, I love performing magic tricks and learning cool card tricks, which I think is my biggest hack.</p>
+
+                    <h3>Born or Made? The Universal Hacker Potential</h3>
+
+                    <p>Although there are many more topics I would like to talk about, I would like to end with a comment on a point the author made about whether hackers are born or made. In my opinion, everyone is born to be a hacker in some field. It is a matter of exploring the many disciplines until finding that passion that one is born to hack in. However, if one doesn't explore enough, they won't find their passion and will end up stuck in a pursuit they like just enough that they need to make themselves great hackers at.</p>
+
+                    <p><em>To end this blog, I'd like to say that the choice of Chinese food for the hackers is a very good choice and wonder if Taco Bell could be the present equivalent today.</em></p>
                 </div>
                 <div class="blog-tags">
                     <h4>Topics:</h4>
                     <div class="tag-list">
                         <span class="tag">MIT TMRC</span>
                         <span class="tag">Hacker Origins</span>
-                        <span class="tag">Computing History</span>
-                        <span class="tag">Information Freedom</span>
+                        <span class="tag">Notre Dame</span>
+                        <span class="tag">Hands-on Learning</span>
+                        <span class="tag">Academic vs. Passion</span>
                         <span class="tag">Hacker Ethic</span>
                     </div>
                 </div>

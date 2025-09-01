@@ -4,14 +4,14 @@
     <subtitle>Weekly reflections on hacker culture, open source development, and the journey through CSE 40842</subtitle>
     <link href="https://layannwardeh.com/blog" rel="alternate" type="text/html"/>
     <link href="https://layannwardeh.com/feed.xml" rel="self" type="application/atom+xml"/>
-    <updated>2025-08-26T00:00:00Z</updated>
+    <updated>2025-08-31T23:59:59Z</updated>
     <id>https://layannwardeh.com/blog</id>
     <author>
         <name>Layann Wardeh</name>
         <email>lwardeh@nd.edu</email>
     </author>
 
-    <!-- Reading 01 Entry -->
+    <!-- Reading 01 Entry - Update with your actual content when published -->
     <entry>
         <title>Reading 01: Cambridge - The Fifties and Sixties</title>
         <link href="https://layannwardeh.com/blog#reading-01"/>
@@ -21,13 +21,23 @@
         <summary>First reflection on Steven Levy's exploration of early hacker culture at MIT and the origins of the hacker ethic.</summary>
         <content type="html"><![CDATA[
             <h2>Reading 01: Cambridge - The Fifties and Sixties</h2>
-            <p><em>Content will be updated when the reflection is published...</em></p>
-            <p>This reflection explores Steven Levy's account of the MIT Tech Model Railroad Club and the birth of hacker culture in the 1950s and 1960s.</p>
+            <p>For my first blog, I'd like to start by making a comparison between the setting of the first book we are reading, <em>Hackers: Heroes of the Computer Revolution</em>, and the CSE student life at Notre Dame. Throughout reading, whenever the author mentioned Building 26 and the EAM room, I envisioned Fitzpatrick Hall of Engineering and the basement room B19, where CSE students, specifically CPEGS, spend their late nights studying.</p>
+            
+            <p>The author mentioned hackers working "in the basement of this building void of personality, the EAM room." The author also writes, "where [Peter] would wander the hallways at two o'clock in the morning [...] he would discover a computer that he would play with." I am not sure about you, but those lines scream Fitzpatrick ("building void of personality"), B19 room ("in the basement" and "the EAM room"), and the hallways students walk through in the middle of the night ("wander the hallways at two o'clock in the morning").</p>
+            
+            <h3>The Hacker Mindset: Hands-On Learning</h3>
+            <p>In the early chapters, the author writes, <strong>"Peter Samson and his friends had grown up with a specific relationship to the world, wherein devices had meaning only if you found out how they worked. And how would you go about that if not by getting your hands on them?"</strong> This quote defines one of the main qualities of a hacker. It defines a hacker as someone who doesn't go about their day only experiencing it through a third-view point-of-view. Rather, a hacker goes about their day by digging deeper into the objects around them.</p>
+            
+            <h3>The Tension Between Academic Achievement and True Learning</h3>
+            <p>Additionally, in the early chapters, the author talks about the many obstacles to learning that already exist, and mentions that to Samson, the quest of hacking meant more than a degree and more than bothering with trivial matters like teachers and grades. What set Samson apart from his peers is this carelessness he had toward his in-class education because he saw something greater, more rewarding, and with greater output.</p>
+            
+            <p>In my opinion, everyone is born to be a hacker in some field. It is a matter of exploring the many disciplines until finding that passion that one is born to hack in. However, if one doesn't explore enough, they won't find their passion and will end up stuck in a pursuit they like just enough that they need to make themselves great hackers at.</p>
         ]]></content>
         <category term="MIT TMRC"/>
         <category term="Hacker Origins"/>
-        <category term="Computing History"/>
-        <category term="Information Freedom"/>
+        <category term="Notre Dame"/>
+        <category term="Hands-on Learning"/>
+        <category term="Academic vs. Passion"/>
         <category term="Hacker Ethic"/>
     </entry>
 </feed>
