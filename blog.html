@@ -501,37 +501,6 @@
             font-style: italic;
         }
 
-        /* Back to Top */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--gradient-2);
-            color: var(--text-white);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 10px 30px var(--accent-glow);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            font-size: 1.25rem;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 15px 40px var(--accent-glow);
-        }
-
         /* Reading Schedule Section */
         .reading-schedule {
             margin-bottom: 4rem;
@@ -701,7 +670,7 @@
             border: 1px solid rgba(33, 150, 243, 0.3);
         }
 
-        .writing-status:not(.in-progress) {
+        .writing-status:not(.in-progress):not(.done) {
             background: rgba(156, 39, 176, 0.2);
             color: #9c27b0;
             border: 1px solid rgba(156, 39, 176, 0.3);
@@ -724,127 +693,73 @@
             pointer-events: none;
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            opacity: 0;
+        /* Expandable Post Styles */
+        .expandable-post {
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 0;
-            max-width: 90vw;
-            max-height: 90vh;
-            width: 800px;
+        .expandable-post .blog-header {
             position: relative;
-            overflow: hidden;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .modal.show .modal-content {
-            transform: scale(1);
+        .expandable-post .blog-header:hover {
+            background: rgba(50, 130, 184, 0.05);
+            transform: translateX(5px);
         }
 
-        .modal-header {
-            padding: 2rem 2rem 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 0;
-        }
-
-        .modal-body {
-            padding: 2rem;
-            max-height: 70vh;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: var(--highlight-color) transparent;
-        }
-
-        .modal-body::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .modal-body::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .modal-body::-webkit-scrollbar-thumb {
-            background: var(--highlight-color);
-            border-radius: 3px;
-        }
-
-        .modal-close {
+        .expand-indicator {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            color: var(--text-light);
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--highlight-color);
             transition: all 0.3s ease;
-            z-index: 1;
         }
 
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-white);
-            transform: rotate(90deg);
+        .expand-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
         }
 
-        .modal-blog-post {
-            background: none;
-            border: none;
-            padding: 0;
-            margin: 0;
+        .expandable-post.expanded .expand-arrow {
+            transform: rotate(180deg);
         }
 
-        .modal-blog-post .blog-header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
+        .expandable-post.expanded .expand-text::after {
+            content: " less";
         }
 
-        .coming-soon-modal {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: var(--text-light);
+        .expandable-post:not(.expanded) .expand-text::after {
+            content: "";
         }
 
-        .coming-soon-modal h3 {
-            color: var(--text-white);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+        .blog-content.collapsed {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s ease;
+            padding-top: 0;
+            padding-bottom: 0;
         }
 
-        .coming-soon-modal p {
-            font-style: italic;
-            opacity: 0.8;
-            margin-bottom: 1rem;
+        .blog-content:not(.collapsed) {
+            max-height: none;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
+            padding-top: 2.5rem;
+        }
+
+        .expandable-post.expanded .blog-content {
+            border-top: 1px solid var(--border-color);
+            margin-top: 0;
         }
 
         /* Blog Posts Section */
@@ -879,6 +794,37 @@
             border-radius: 15px;
             font-size: 0.8rem;
             border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gradient-2);
+            color: var(--text-white);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 30px var(--accent-glow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            font-size: 1.25rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px var(--accent-glow);
         }
 
         /* Responsive */
@@ -932,6 +878,12 @@
 
             .writing-number {
                 min-width: auto;
+            }
+
+            .expand-indicator {
+                position: static;
+                margin-top: 1rem;
+                justify-content: center;
             }
         }
 
@@ -1019,8 +971,8 @@
                     <p>Books to Explore</p>
                 </div>
                 <div class="stat-item">
-                    <h3>1</h3>
-                    <p>Current Reading</p>
+                    <h3>2</h3>
+                    <p>Posts Published</p>
                 </div>
             </div>
         </div>
@@ -1040,17 +992,17 @@
                     <div class="writings-list">
                         <div class="writing-item">
                             <span class="writing-number">Reading 01</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-01')">Cambridge: The Fifties and Sixties</a></span>
+                            <span class="writing-topic"><a href="#reading-01">Cambridge: The Fifties and Sixties</a></span>
+                            <span class="writing-status done">Done</span>
+                        </div>
+                        <div class="writing-item">
+                            <span class="writing-number">Reading 02</span>
+                            <span class="writing-topic"><a href="#reading-02">Northern California: The Seventies</a></span>
                             <span class="writing-status done">Done</span>
                         </div>
                         <div class="writing-item upcoming">
-                            <span class="writing-number">Reading 02</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-02')">Northern California: The Seventies</a></span>
-                            <span class="writing-status">Coming Soon</span>
-                        </div>
-                        <div class="writing-item upcoming">
                             <span class="writing-number">Reading 03</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-03')">The Sierras: The Eighties</a></span>
+                            <span class="writing-topic"><a href="#reading-03">The Sierras: The Eighties</a></span>
                             <span class="writing-status">Coming Soon</span>
                         </div>
                     </div>
@@ -1065,17 +1017,17 @@
                     <div class="writings-list">
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 04</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-04')">Why Nerds Are Unpopular & Creative Expression</a></span>
+                            <span class="writing-topic"><a href="#reading-04">Why Nerds Are Unpopular & Creative Expression</a></span>
                             <span class="writing-status">Sept 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 05</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-05')">Programming Languages & Innovation</a></span>
+                            <span class="writing-topic"><a href="#reading-05">Programming Languages & Innovation</a></span>
                             <span class="writing-status">Oct 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 06</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-06')">Wealth Creation & Entrepreneurship</a></span>
+                            <span class="writing-topic"><a href="#reading-06">Wealth Creation & Entrepreneurship</a></span>
                             <span class="writing-status">Oct 2025</span>
                         </div>
                     </div>
@@ -1090,12 +1042,12 @@
                     <div class="writings-list">
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 07</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-07')">Hacker History & Development Models</a></span>
+                            <span class="writing-topic"><a href="#reading-07">Hacker History & Development Models</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 08</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-08')">Open Source Economics</a></span>
+                            <span class="writing-topic"><a href="#reading-08">Open Source Economics</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                     </div>
@@ -1110,12 +1062,12 @@
                     <div class="writings-list">
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 09</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-09')">Birth of Linux & Open Source Revolution</a></span>
+                            <span class="writing-topic"><a href="#reading-09">Birth of Linux & Open Source Revolution</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                         <div class="writing-item upcoming">
                             <span class="writing-number">Reading 10</span>
-                            <span class="writing-topic"><a href="#" onclick="openModal('modal-reading-10')">Leading Open Source Communities</a></span>
+                            <span class="writing-topic"><a href="#reading-10">Leading Open Source Communities</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
                     </div>
@@ -1123,14 +1075,67 @@
             </div>
         </section>
 
-        <!-- Blog Posts will appear here as they are written -->
+        <!-- Blog Posts Section -->
         <section class="blog-posts">
             <h2>Weekly Reflections</h2>
-            <p class="blog-intro">Individual reflections on the readings will appear here as they are completed throughout the semester. Each post will explore the themes, ideas, and personal insights from the assigned materials.</p>
+            <p class="blog-intro">Individual reflections on the readings will appear here as they are completed throughout the semester. Click on each post to expand and read the full reflection.</p>
             
-            <!-- Reading 01 - Your actual blog post -->
-            <article id="reading-01" class="blog-post">
-                <div class="blog-header">
+            <!-- Reading 02 - Your new blog post -->
+            <article id="reading-02" class="blog-post expandable-post">
+                <div class="blog-header" onclick="togglePost('reading-02')">
+                    <div class="blog-week">Reading 02</div>
+                    <h2 class="blog-title">Northern California: The Seventies</h2>
+                    <div class="blog-meta">
+                        <span>📅 September 7, 2025</span>
+                        <span class="word-count">672 words</span>
+                        <span class="blog-reading">Hackers Part Two</span>
+                    </div>
+                    <div class="expand-indicator">
+                        <span class="expand-text">Click to read</span>
+                        <span class="expand-arrow">▼</span>
+                    </div>
+                </div>
+                <div class="blog-content collapsed" id="content-reading-02">
+                    <p>For this week's blog, I'd like to reflect on Part 2 of <em>Hackers: Heroes of the Computer Revolution</em>. As I read (listened… audible is great because there is so much to read) through these chapters, I came to the realization that "True Hackers" and the "Hardware Hackers" are not so different in their motivations, even though their approaches and communities diverged. Both groups shared a deep belief in the hands-on imperative.</p>
+
+                    <p>And this is apparent when the author wrote, <strong>"His goal was to break computers out of the protected AI towers, up from the depths of the dungeons of corporate accounting departments, and let people discover themselves by the Hands-On Imperative."</strong> What connected "True Hackers" and "Hardware Hackers" was their raw desire to explore, build, and create, while doing so for the purpose of hacking and joy of discovery rather than money or recognition. However, the difference came in how they wanted to hack. "True Hackers" wanted to stay in their labs hacking, while "Hardware Hackers" aimed to make computing accessible to everyone.</p>
+
+                    <h3>Can You Be a Part-Time Hacker?</h3>
+
+                    <p>In our class discussion, Professor Bui asked whether being a hacker means being a full-time hacker. To me, the answer is no. I don't think being a hacker requires abandoning every other pursuit in life. As the book shows, even someone like Lee had to balance passions with reality. For me, hacking can be a "part-time" job, something done alongside responsibilities.</p>
+
+                    <p>In reality, everyone needs to work to provide for their needs (at least I do), and hacking doesn't always have to replace that, but it can be done alongside providing for yourself. As I start watching <em>Mr. Robot</em> (2 weeks and still only on episode one, but progress is being made), that's exactly what the main character does: he works his day job and becomes a hacker at night. To me, this doesn't diminish his identity as a hacker, but rather reinforces that hacking can take many forms and fit into different lifestyles.</p>
+
+                    <h3>The Free vs. Paid Software Debate</h3>
+
+                    <p>Another theme that stood out was the debate about software: should it be free or paid? Fred Moore, for instance, believed in computers as tools for community, <strong>"not only for the pleasure they gave to devoted programmers, but also for their ability to bring people together."</strong> This vision of openness influenced the idea that software should be shared, not locked away.</p>
+
+                    <p>But others, like Bill Gates, rejected this notion, arguing that <strong>"software represented work, just as hardware did, and Altair BASIC was listed in the MITS catalog like anything else it sold."</strong> I think both sides have true-ness to them and can be solid arguments. However, as someone who always looks for and believes in a balance, I believe software should be both free and paid.</p>
+
+                    <h3>Finding Balance: The Freemium Model</h3>
+
+                    <p>Free versions open doors for exploration and learning, mirroring the Hacker Ethic of sharing knowledge, while paid versions, with premium features, recognize the labor and creativity of developers. And from a "business" standpoint (since my brain often wonders if I should've been a Mebroza), having a freemium version can open doors to customers to pay for the premium version since most people don't like to waste money on something if they don't know it is worth it or is what they want.</p>
+
+                    <p>However, it is important to note that some programmers create just for the joy of creating, as the book puts it, <strong>"out of sheer delight in the activity for its own sake,"</strong> like my friend H, who was mentioned in the last blog. These two ideas, creating for joy and creating for pay, I don't think contradict each other because each person will create based on their needs and interest/inspiration.</p>
+
+                    <div class="blog-tags">
+                        <h4>Topics:</h4>
+                        <div class="tag-list">
+                            <span class="tag">Hardware Hackers</span>
+                            <span class="tag">Hands-On Imperative</span>
+                            <span class="tag">Software Freedom</span>
+                            <span class="tag">Work-Life Balance</span>
+                            <span class="tag">Freemium Model</span>
+                            <span class="tag">Bill Gates</span>
+                            <span class="tag">Mr. Robot</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reading 01 - Your first blog post -->
+            <article id="reading-01" class="blog-post expandable-post">
+                <div class="blog-header" onclick="togglePost('reading-01')">
                     <div class="blog-week">Reading 01</div>
                     <h2 class="blog-title">Cambridge: The Fifties and Sixties</h2>
                     <div class="blog-meta">
@@ -1138,11 +1143,15 @@
                         <span class="word-count">846 words</span>
                         <span class="blog-reading">Hackers Part One</span>
                     </div>
+                    <div class="expand-indicator">
+                        <span class="expand-text">Click to read</span>
+                        <span class="expand-arrow">▼</span>
+                    </div>
                 </div>
-                <div class="blog-content">
+                <div class="blog-content collapsed" id="content-reading-01">
                     <p>For my first blog, I'd like to start by making a comparison between the setting of the first book we are reading, <em>Hackers: Heroes of the Computer Revolution</em>, and the CSE student life at Notre Dame. Throughout reading, whenever the author mentioned Building 26 and the EAM room, I envisioned Fitzpatrick Hall of Engineering and the basement room B19, where CSE students, specifically CPEGS, spend their late nights studying.</p>
 
-                    <p>The author mentioned hackers working "in the basement of this building void of personality, the EAM room." The author also writes, "where [Peter] would wander the hallways at two o'clock in the morning […] he would discover a computer that he would play with." I am not sure about you, but those lines scream Fitzpatrick ("building void of personality"), B19 room ("in the basement" and "the EAM room"), and the hallways students walk through in the middle of the night ("wander the hallways at two o'clock in the morning"). I am also wondering if Prof. Bui loved this book so much because one of the main characters is also named Peter 🤔 But now that I have brought this book to reality and now that I have brought it to Notre Dame, it may be easier to reflect on.</p>
+                    <p>The author mentioned hackers working "in the basement of this building void of personality, the EAM room." The author also writes, "where [Peter] would wander the hallways at two o'clock in the morning […] he would discover a computer that he would play with." I am not sure about you, but those lines scream Fitzpatrick ("building void of personality"), B19 room ("in the basement" and "the EAM room"), and the hallways students walk through in the middle of the night ("wander the hallways at two o'clock in the morning"). I am also wondering if Prof. Bui loved this book so much because one of the main characters is also named Bui 🤔 But now that I have brought this book to reality and now that I have brought it to Notre Dame, it may be easier to reflect on.</p>
 
                     <h3>The Hacker Mindset: Hands-On Learning</h3>
 
@@ -1169,27 +1178,22 @@
                     <p>Although there are many more topics I would like to talk about, I would like to end with a comment on a point the author made about whether hackers are born or made. In my opinion, everyone is born to be a hacker in some field. It is a matter of exploring the many disciplines until finding that passion that one is born to hack in. However, if one doesn't explore enough, they won't find their passion and will end up stuck in a pursuit they like just enough that they need to make themselves great hackers at.</p>
 
                     <p><em>To end this blog, I'd like to say that the choice of Chinese food for the hackers is a very good choice and wonder if Taco Bell could be the present equivalent today.</em></p>
-                </div>
-                <div class="blog-tags">
-                    <h4>Topics:</h4>
-                    <div class="tag-list">
-                        <span class="tag">MIT TMRC</span>
-                        <span class="tag">Hacker Origins</span>
-                        <span class="tag">Notre Dame</span>
-                        <span class="tag">Hands-on Learning</span>
-                        <span class="tag">Academic vs. Passion</span>
-                        <span class="tag">Hacker Ethic</span>
+
+                    <div class="blog-tags">
+                        <h4>Topics:</h4>
+                        <div class="tag-list">
+                            <span class="tag">MIT TMRC</span>
+                            <span class="tag">Hacker Origins</span>
+                            <span class="tag">Notre Dame</span>
+                            <span class="tag">Hands-on Learning</span>
+                            <span class="tag">Academic vs. Passion</span>
+                            <span class="tag">Hacker Ethic</span>
+                        </div>
                     </div>
                 </div>
             </article>
 
-            <!-- Placeholders for future readings -->
-            <div id="reading-02" class="coming-soon">
-                <h3>Reading 02: Northern California - The Seventies</h3>
-                <p>Reflection on the hardware hackers and the personal computer revolution.</p>
-                <small>Due: Sunday, September 7, 2025 at midnight</small>
-            </div>
-
+            <!-- Coming Soon Posts -->
             <div id="reading-03" class="coming-soon">
                 <h3>Reading 03: The Sierras - The Eighties</h3>
                 <p>Exploring the game hackers and the commercialization of hacker culture.</p>
@@ -1244,6 +1248,26 @@
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
     <script>
+        // Expandable post functionality
+        function togglePost(postId) {
+            const post = document.getElementById(postId);
+            const content = document.getElementById('content-' + postId);
+            const arrow = post.querySelector('.expand-arrow');
+            const text = post.querySelector('.expand-text');
+            
+            if (post.classList.contains('expanded')) {
+                // Collapse
+                post.classList.remove('expanded');
+                content.classList.add('collapsed');
+                text.textContent = 'Click to read';
+            } else {
+                // Expand
+                post.classList.add('expanded');
+                content.classList.remove('collapsed');
+                text.textContent = 'Click to hide';
+            }
+        }
+
         // Hamburger menu toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
@@ -1336,7 +1360,7 @@
             observer.observe(el);
         });
 
-        // Dynamic word count update (for demonstration)
+        // Dynamic word count update
         document.querySelectorAll('.word-count').forEach(counter => {
             const text = counter.closest('.blog-post').querySelector('.blog-content').textContent;
             const wordCount = text.trim().split(/\s+/).length;
