@@ -4,14 +4,52 @@
     <subtitle>Weekly reflections on hacker culture, open source development, and the journey through CSE 40842</subtitle>
     <link href="https://layannwardeh.com/blog" rel="alternate" type="text/html"/>
     <link href="https://layannwardeh.com/feed.xml" rel="self" type="application/atom+xml"/>
-    <updated>2025-08-31T23:59:59Z</updated>
+    <updated>2025-09-07T23:59:59Z</updated>
     <id>https://layannwardeh.com/blog</id>
     <author>
         <name>Layann Wardeh</name>
         <email>lwardeh@nd.edu</email>
     </author>
 
-    <!-- Reading 01 Entry - Update with your actual content when published -->
+    <!-- Reading 02 Entry -->
+    <entry>
+        <title>Reading 02: Northern California - The Seventies</title>
+        <link href="https://layannwardeh.com/blog#reading-02"/>
+        <updated>2025-09-07T23:59:59Z</updated>
+        <published>2025-09-07T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-02</id>
+        <summary>Second reflection on Steven Levy's Hackers, exploring the connection between "True Hackers" and "Hardware Hackers," the debate over free vs. paid software, and whether hacking can be a part-time pursuit while balancing real-world responsibilities.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 02: Northern California - The Seventies</h2>
+            <p>For this week's blog, I'd like to reflect on Part 2 of <em>Hackers: Heroes of the Computer Revolution</em>. As I read (listened… audible is great because there is so much to read) through these chapters, I came to the realization that "True Hackers" and the "Hardware Hackers" are not so different in their motivations, even though their approaches and communities diverged. Both groups shared a deep belief in the hands-on imperative.</p>
+
+            <p>And this is apparent when the author wrote, <strong>"His goal was to break computers out of the protected AI towers, up from the depths of the dungeons of corporate accounting departments, and let people discover themselves by the Hands-On Imperative."</strong> What connected "True Hackers" and "Hardware Hackers" was their raw desire to explore, build, and create, while doing so for the purpose of hacking and joy of discovery rather than money or recognition. However, the difference came in how they wanted to hack. "True Hackers" wanted to stay in their labs hacking, while "Hardware Hackers" aimed to make computing accessible to everyone.</p>
+
+            <h3>Can You Be a Part-Time Hacker?</h3>
+            <p>In our class discussion, Professor Bui asked whether being a hacker means being a full-time hacker. To me, the answer is no. I don't think being a hacker requires abandoning every other pursuit in life. As the book shows, even someone like Lee had to balance passions with reality. For me, hacking can be a "part-time" job, something done alongside responsibilities.</p>
+
+            <p>In reality, everyone needs to work to provide for their needs (at least I do), and hacking doesn't always have to replace that, but it can be done alongside providing for yourself. As I start watching <em>Mr. Robot</em> (2 weeks and still only on episode one, but progress is being made), that's exactly what the main character does: he works his day job and becomes a hacker at night. To me, this doesn't diminish his identity as a hacker, but rather reinforces that hacking can take many forms and fit into different lifestyles.</p>
+
+            <h3>The Free vs. Paid Software Debate</h3>
+            <p>Another theme that stood out was the debate about software: should it be free or paid? Fred Moore, for instance, believed in computers as tools for community, <strong>"not only for the pleasure they gave to devoted programmers, but also for their ability to bring people together."</strong> This vision of openness influenced the idea that software should be shared, not locked away.</p>
+
+            <p>But others, like Bill Gates, rejected this notion, arguing that <strong>"software represented work, just as hardware did, and Altair BASIC was listed in the MITS catalog like anything else it sold."</strong> I think both sides have true-ness to them and can be solid arguments. However, as someone who always looks for and believes in a balance, I believe software should be both free and paid.</p>
+
+            <h3>Finding Balance: The Freemium Model</h3>
+            <p>Free versions open doors for exploration and learning, mirroring the Hacker Ethic of sharing knowledge, while paid versions, with premium features, recognize the labor and creativity of developers. And from a "business" standpoint (since my brain often wonders if I should've been a Mebroza), having a freemium version can open doors to customers to pay for the premium version since most people don't like to waste money on something if they don't know it is worth it or is what they want.</p>
+
+            <p>However, it is important to note that some programmers create just for the joy of creating, as the book puts it, <strong>"out of sheer delight in the activity for its own sake,"</strong> like my friend H, who was mentioned in the last blog. These two ideas, creating for joy and creating for pay, I don't think contradict each other because each person will create based on their needs and interest/inspiration.</p>
+        ]]></content>
+        <category term="Hardware Hackers"/>
+        <category term="Hands-On Imperative"/>
+        <category term="Software Freedom"/>
+        <category term="Work-Life Balance"/>
+        <category term="Freemium Model"/>
+        <category term="Bill Gates"/>
+        <category term="Mr. Robot"/>
+    </entry>
+
+    <!-- Reading 01 Entry -->
     <entry>
         <title>Reading 01: Cambridge - The Fifties and Sixties</title>
         <link href="https://layannwardeh.com/blog#reading-01"/>
@@ -40,4 +78,6 @@
         <category term="Academic vs. Passion"/>
         <category term="Hacker Ethic"/>
     </entry>
+
+    
 </feed>
