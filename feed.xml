@@ -4,12 +4,45 @@
     <subtitle>Weekly reflections on hacker culture, open source development, and the journey through CSE 40842</subtitle>
     <link href="https://layannwardeh.com/blog" rel="alternate" type="text/html"/>
     <link href="https://layannwardeh.com/feed.xml" rel="self" type="application/atom+xml"/>
-    <updated>2025-09-07T23:59:59Z</updated>
+    <updated>2025-09-14T23:59:59Z</updated>
     <id>https://layannwardeh.com/blog</id>
     <author>
         <name>Layann Wardeh</name>
         <email>lwardeh@nd.edu</email>
     </author>
+
+    <!-- Reading 03 Entry -->
+    <entry>
+        <title>Reading 03: The Sierras - The Eighties</title>
+        <link href="https://layannwardeh.com/blog#reading-03"/>
+        <updated>2025-09-14T23:59:59Z</updated>
+        <published>2025-09-14T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-03</id>
+        <summary>Third reflection on Steven Levy's Hackers, examining the "Game Hackers" era and how the introduction of commercial interests transformed the hacker ethic while questioning whether one can maintain hacker principles within a profit-driven marketplace.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 03: The Sierras - The Eighties</h2>
+            <p>Reading through Part Three of <em>Hackers</em> this week, the "Game Hackers" section, really got me thinking. What struck me most was watching hacking evolve from this pure love of discovery into something tangled up with money, fame, and business ambitions. Levy describes these new hackers as people <strong>"who dreamed not only of the ultimate hack, but of fame, and big royalty checks."</strong></p>
+
+            <p>Honestly, I can't say I was surprised by this shift. Once computers broke out of labs and garages and became something regular people could actually buy, it was pretty inevitable that someone would start thinking about markets and profit margins. But it does make you wonder, what happens to that original Hacker Ethic when the driving force isn't just curiosity anymore, but cold hard cash?</p>
+
+            <p>When I compare these game hackers to the earlier generations, there are definitely similarities. They still had that obsessive love for computing, still pulled all-nighters perfecting their code, still got creative with solutions. But here's the key difference: their relationship with the marketplace was completely different. The earlier hackers fought against institutions and rules (and stayed away from women lol), while these Game Hackers started embracing those same systems, in some ways. Levy quotes Ken Williams as being <strong>"convinced that hackers should be stifled; what's needed is to guess what the marketplace wants, access to distribution channels, money, gimmicks, market promotion."</strong> That's so far away from Peter Samson wandering MIT's halls at 2 AM just for the pure joy of messing around with computers. It really shows how chasing commercial success can shift your priorities, even when you started with that genuine hacker spirit.</p>
+
+            <p>There's this question Levy poses that really stuck with me: <strong>"Did you really benefit from your computer if you did not program it?"</strong> For the Game Hackers, this seemed way less important than it was for earlier generations. By the 1980s, plenty of people were getting real value from their computers without being programmers, they had games and apps that others created for them. But I think Levy's onto something here. Without being able to create or tinker with your tools, you're missing out on some of the magic that makes computing special. He also asks whether it's good for the public when one company owns a piece of software. This is where things get really interesting for me. Sure, proprietary software created stability, jobs, and gave companies reasons to keep innovating. But it also threw up walls around the things hackers cared most about: sharing knowledge, freedom to experiment, and collaboration.</p>
+
+            <p>My takeaway? The Hacker Ethic can survive when money enters the picture, but it's going to change. While the whole ethic might not remain the same, we can definitely hold onto pieces of that spirit.</p>
+
+            <p>For me, the sweet spot is being a professional programmer who still genuinely loves computing (probably not me being this professional, but we are talking about ideas here). You can pay your bills and still make room for that hacker perfectionism. This connects back to something we've talked about in class, whether hackers have to be full-time hackers… I really don't think so. Hackers can exist everywhere: in research labs, in politics, in game companies. What matters isn't whether they're getting paid for it, but whether they're keeping that curiosity and drive alive.</p>
+
+            <p>So when I think about these Game Hackers, I don't see them as completely abandoning the Hacker Ethic. They were adapting it to work in a world where hacking had to pay the bills. Whether that compromise was worth it probably depends on what you value more: staying true to ideals or actually making an impact in the world. As for me? I think you can live somewhere in between. You can participate in the commercial world while still approaching your work with a hacker's mindset.</p>
+        ]]></content>
+        <category term="Game Hackers"/>
+        <category term="Commercialization"/>
+        <category term="Hacker Ethic"/>
+        <category term="Software Freedom"/>
+        <category term="Professional Programming"/>
+        <category term="Ken Williams"/>
+        <category term="Work-Life Balance"/>
+    </entry>
 
     <!-- Reading 02 Entry -->
     <entry>
