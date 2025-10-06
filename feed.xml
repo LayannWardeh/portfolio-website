@@ -4,12 +4,43 @@
     <subtitle>Weekly reflections on hacker culture, open source development, and the journey through CSE 40842</subtitle>
     <link href="https://layannwardeh.com/blog" rel="alternate" type="text/html"/>
     <link href="https://layannwardeh.com/feed.xml" rel="self" type="application/atom+xml"/>
-    <updated>2025-09-14T23:59:59Z</updated>
+    <updated>2025-10-05T23:59:59Z</updated>
     <id>https://layannwardeh.com/blog</id>
     <author>
         <name>Layann Wardeh</name>
         <email>lwardeh@nd.edu</email>
     </author>
+
+    <!-- Reading 05 Entry -->
+    <entry>
+        <title>Reading 05: Programming Languages & Innovation</title>
+        <link href="https://layannwardeh.com/blog#reading-05"/>
+        <updated>2025-10-05T23:59:59Z</updated>
+        <published>2025-10-05T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-05</id>
+        <summary>Fourth reflection exploring Paul Graham's ideas on programming languages, drawing parallels between spoken languages and code, and examining how language choice shapes both thought patterns and innovation potential in software development.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 05: Programming Languages & Innovation</h2>
+            <p>I found this week's readings very interesting, especially when it comes to the language a programmer uses. A lot of the emphasis was on how the programming language a programmer uses dictates the way they think and the way they solve problems. After the reading, that constraint became obvious to me, especially with the example of a programmer only using the language <strong>"Basic"</strong> and thus not knowing recursion.</p>
+
+            <p>However, as I reflect on my experiences with programming languages, I find it difficult to find a language that I'd use that is unique to the work I would like to do. In high school, I wanted to take another AP class (to have a better-looking transcript), and the only AP that fit in my schedule was AP Computer Science A. Though that class had a prerequisite, so I had to take an online summer course to fulfill that requirement. The online class was taught in Python. Thus, the first ever language I learned was Python. Then, during the AP class, Java was taught. Finally, during my senior year, I took another programming class, which was taught in Java and we learned a bit of SQL and HTML.</p>
+
+            <p>What I am trying to say is that during all of these courses, I was never given a chance to pick a language, rather I was given one to learn. But in addition to that, I was never taught the differences between these languages and how each language is more useful in different areas (till university at least). With that being said, I think it is similar to how babies are raised… You don't pick the language you learn as a kid, but that's what you learn, and what you become good at.</p>
+
+            <p>Connecting back to the discussion we had in class about learning being more tailored to the individual, I wonder if there could be more opportunities (outside of this class) for students to learn a language of their choice, but with the context of these readings. If I was given the choice to learn one programming language prior to this discussion and at the very beginning of my programming journey, I would have chosen Python because of its ease of use and widespread resources. However, I wonder if providing this context to me early on would have changed my choice or if it would have encouraged me to look into the different strengths and uses of not widely used programming languages.</p>
+
+            <p>Another interesting idea in the readings was about how businesses only excel when they are very much out of the ordinary. Interestingly, tying in how using an unconventional, powerful language is a way to <strong>"be doing something odd"</strong> that yields superior results. At first, I wanted to challenge this idea and argue that the language a programmer uses doesn't really affect the outcome. However, I thought about literature, specifically the Arabic language. In my (very humble) opinion, one of the most beautiful languages to read and one of the most descriptive languages is the Arabic language. As someone who grew up learning three languages, Arabic, English, and French, I always found that what I read in Arabic was a lot more comprehensive and rich. With this in mind, I want to go back to the idea about certain programming languages can be a driving factor in superior results and say that, yes I do agree with that. If on the literature level, different languages can have different results, then why isn't aren't different programming languages' results perceived in the same way?</p>
+
+            <p>For this coming project, I hope I can apply the value I learned from this reading about the choice behind programming language my group chooses.</p>
+        ]]></content>
+        <category term="Programming Languages"/>
+        <category term="Learning Philosophy"/>
+        <category term="Innovation"/>
+        <category term="Multilingualism"/>
+        <category term="Paul Graham"/>
+        <category term="Python"/>
+        <category term="Language Choice"/>
+    </entry>
 
     <!-- Reading 03 Entry -->
     <entry>
