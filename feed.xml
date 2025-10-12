@@ -4,12 +4,39 @@
     <subtitle>Weekly reflections on hacker culture, open source development, and the journey through CSE 40842</subtitle>
     <link href="https://layannwardeh.com/blog" rel="alternate" type="text/html"/>
     <link href="https://layannwardeh.com/feed.xml" rel="self" type="application/atom+xml"/>
-    <updated>2025-10-05T23:59:59Z</updated>
+    <updated>2025-10-12T15:34:59Z</updated>
     <id>https://layannwardeh.com/blog</id>
     <author>
         <name>Layann Wardeh</name>
         <email>lwardeh@nd.edu</email>
     </author>
+
+    <!-- Reading 06 Entry -->
+    <entry>
+        <title>Reading 06: Wealth Creation & Entrepreneurship</title>
+        <link href="https://layannwardeh.com/blog#reading-06"/>
+        <updated>2025-10-12T23:59:59Z</updated>
+        <published>2025-10-12T23:59:59Z</published>
+        <id>https://layannwardeh.com/blog#reading-06</id>
+        <summary>Fifth reflection examining Paul Graham's perspective on startups and wealth creation, exploring the role of luck in entrepreneurial success, cultural attitudes toward risk-taking, and finding the balance between traditional career paths and entrepreneurial ambitions.</summary>
+        <content type="html"><![CDATA[
+            <h2>Reading 06: Wealth Creation & Entrepreneurship</h2>
+            <p>I've always wondered what it takes to found a startup, and specifically, what it takes to make it a successful one. While I think a lot of it is tied to how hard one works, how innovative the idea is, and how many people the startup serves, I do think a lot of the success comes down to luck. I listen to a podcast called "How I Built This with Guy Raz." This podcast features highly successful business owners and shares their stories of how they achieved such success. Almost all their stories are along the lines of, "I loved doing this, decided to make it a product to sell, I got really lucky, now I am a millionaire/billionaire."</p>
+
+            <p>Looking at Paul Graham's view on startups: <strong>"Economically, you can think of a startup as a way to compress your whole working life into a few years. Instead of working at a low intensity for forty years, you work as hard as you possibly can for four. This pays especially well in technology, where you earn a premium for working fast."</strong> I think this view is a little bit misleading. While part of it is true, running a startup requires high-intensity work for some years, it doesn't come down to only four or five or six, unless your startup is extremely successful. Otherwise, you will end up having invested all your time and money without an outcome. This is where luck comes in: unless your startup came at the right time, or you were introduced to a person who took your startup to the next level, or you did the right marketing at the right time. Although this may be a pessimistic way of looking at startups, I think it holds true, especially because people always hear about the very, very low number of successful startups… but what's the number of failed startups?</p>
+
+            <p>Growing up in Jordan, it is very common for families to just encourage their children to get a degree and then work at X company, not Twitter lol. Company X should be a decent company that pays decently well. It used to be very rare to see people go outside of the norm (degree → work) until recently. This might be true in America too, where most families encourage their children to go down the "safe" path. What I am trying to say is, before studying here, I never thought of starting my own company or even working at a startup. However, in recent years, especially during my job search, I have found that those who work at startups actually learn a lot more. They work in different parts of the business and have a huge learning curve. They also build closer relationships with those they work with. So if getting rich through joining startups is true, I wonder, why don't more people join startups? I believe, at the end of the day, it comes down to the risk involved with startups. There aren't many people who are willing to take a risk. Some are worried at the beginning of their careers that they need to start at a good company to get a good starting salary and then maybe do something out of the ordinary. Others are scared later on in their lives because they need ways to sustain themselves and their families. So there never seems to be a right time besides actually taking the first step.</p>
+
+            <p>As someone who is interested in founding/acquiring my own company one day, I don't think there is ever a "right time." I think a lot of it comes down to taking the first step while having a backup plan, or working a job during the day and working on a separate hustle at night (my hack).</p>
+        ]]></content>
+        <category term="Startups"/>
+        <category term="Entrepreneurship"/>
+        <category term="Risk-Taking"/>
+        <category term="Wealth Creation"/>
+        <category term="Paul Graham"/>
+        <category term="Career Paths"/>
+        <category term="Side Hustles"/>
+    </entry>
 
     <!-- Reading 05 Entry -->
     <entry>
