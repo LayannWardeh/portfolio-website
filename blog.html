@@ -971,7 +971,7 @@
                     <p>Books to Explore</p>
                 </div>
                 <div class="stat-item">
-                    <h3>5</h3>
+                    <h3>6</h3>
                     <p>Posts Published</p>
                 </div>
             </div>
@@ -1045,10 +1045,10 @@
                             <span class="writing-topic"><a href="#reading-07">Hacker History & Development Models</a></span>
                             <span class="writing-status">Nov 2025</span>
                         </div>
-                        <div class="writing-item upcoming">
+                        <div class="writing-item">
                             <span class="writing-number">Reading 08</span>
                             <span class="writing-topic"><a href="#reading-08">Open Source Economics</a></span>
-                            <span class="writing-status">Nov 2025</span>
+                            <span class="writing-status done">Done</span>
                         </div>
                     </div>
                 </div>
@@ -1080,7 +1080,51 @@
             <h2>Weekly Reflections</h2>
             <p class="blog-intro">Individual reflections on the readings will appear here as they are completed throughout the semester. Click on each post to expand and read the full reflection.</p>
             
-            <!-- Reading 06 - NEW POST -->
+            <!-- Reading 08 - NEW POST -->
+            <article id="reading-08" class="blog-post expandable-post">
+                <div class="blog-header" onclick="togglePost('reading-08')">
+                    <div class="blog-week">Reading 08</div>
+                    <h2 class="blog-title">Open Source Economics</h2>
+                    <div class="blog-meta">
+                        <span>📅 November 9, 2025</span>
+                        <span class="word-count">636 words</span>
+                        <span class="blog-reading">The Cathedral and The Bazaar</span>
+                    </div>
+                    <div class="expand-indicator">
+                        <span class="expand-text">Click to read</span>
+                        <span class="expand-arrow">▼</span>
+                    </div>
+                </div>
+                <div class="blog-content collapsed" id="content-reading-08">
+                    <p>After this week's reading, the open-source world doesn't look like chaos to me anymore. It looks like a neighborhood with unwritten rules everyone somehow knows, and a few loud neighbors who water their lawns at midnight and still get invited to the block party.</p>
+
+                    <p>What actually drives people to show up and build things for free? I don't think the answer is as mysterious as it sounds. Part of it is joy. The hands-on imperative we keep circling back to in class. You touch the thing, you change the thing, and you learn by leaving fingerprints. The other part is reputation, but ESR's "gift economy" framing clicked for me. You don't get paid in dollars up front. You get paid in trust. People start recognizing your name on a README. Your issues get a kinder reply. Later, a job or a contract shows up because your commits did the talking.</p>
+
+                    <p>ESR's "taboos" initially look conservative, pressure against forking, discouraging drive-by releases around maintainers, and the absolute rule against removing names, but mapped to throughput they make practical sense. <strong>Forks are not forbidden so much as treated as a last resort because they split attention and duplicate maintenance; bypassing maintainers might feel efficient in the moment, yet it erodes the review pipeline and raises risk; and credit stripping is simply theft, which poisons the core trade in this economy, since contributors exchange time for recognition as much as for technical progress.</strong> These norms don't contradict openness; they protect the conditions that let strangers coordinate at scale.</p>
+
+                    <p>On the money side, The Magic Cauldron basically says selling services isn't a downgrade, it's just where the real value shows up. Code wants to be copied; context doesn't. That's why people pay for the messy parts they actually feel: integrations, upgrades, SLAs, training, hosting that doesn't go down at 3 am. If the code is the tool, services are the fit and finish, and most of the pain (and budget) lives there. So it makes sense for companies to open what boosts adoption and charge for the ongoing work that keeps the thing running in real environments.</p>
+
+                    <p>Picking closed vs. open isn't a moral crusade so much as a risk call. <strong>If your edge is a tight, safety-critical algorithm with compliance or security concerns, keeping it closed can fund the rigor and reduce exposure. If your edge is ecosystem, speed, and playing nicely with others, open source is rocket fuel because it lowers the cost of trust, multiplies testers, and speeds up compatibility.</strong> Most good products split the difference: open the parts that benefit from lots of eyes, and keep the bits where secrecy still buys you time, compliance, or a real moat.</p>
+
+                    <p>If the open-source flywheel is so great, why don't more people jump in? Time pressure, not wanting to mess up in public, and a real "where do I start" problem with tools and norms. School doesn't help either. The fix isn't a pep talk; it's smaller first steps. Tighten a doc, add a test, write a minimal repro, or file a clean bug. Those are useful, low-risk, and they teach you how the project works before you try a big refactor… And taking Bui's Hackers in the Bazaar is a great first step!</p>
+
+                    <div class="blog-tags">
+                        <h4>Topics:</h4>
+                        <div class="tag-list">
+                            <span class="tag">Open Source</span>
+                            <span class="tag">Gift Economy</span>
+                            <span class="tag">Eric Raymond</span>
+                            <span class="tag">Community Norms</span>
+                            <span class="tag">Business Models</span>
+                            <span class="tag">Services vs Products</span>
+                            <span class="tag">Getting Started</span>
+                            <span class="tag">Magic Cauldron</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Reading 06 -->
             <article id="reading-06" class="blog-post expandable-post">
                 <div class="blog-header" onclick="togglePost('reading-06')">
                     <div class="blog-week">Reading 06</div>
@@ -1119,7 +1163,7 @@
                 </div>
             </article>
             
-            <!-- Reading 05 - New blog post -->
+            <!-- Reading 05 -->
             <article id="reading-05" class="blog-post expandable-post">
                 <div class="blog-header" onclick="togglePost('reading-05')">
                     <div class="blog-week">Reading 05</div>
@@ -1162,7 +1206,7 @@
                 </div>
             </article>
 
-            <!-- Reading 03 - New blog post -->
+            <!-- Reading 03 -->
             <article id="reading-03" class="blog-post expandable-post">
                 <div class="blog-header" onclick="togglePost('reading-03')">
                     <div class="blog-week">Reading 03</div>
@@ -1207,7 +1251,7 @@
                 </div>
             </article>
 
-            <!-- Reading 02 - Your second blog post -->
+            <!-- Reading 02 -->
             <article id="reading-02" class="blog-post expandable-post">
                 <div class="blog-header" onclick="togglePost('reading-02')">
                     <div class="blog-week">Reading 02</div>
@@ -1260,14 +1304,14 @@
                 </div>
             </article>
 
-            <!-- Reading 01 - Your first blog post -->
+            <!-- Reading 01 -->
             <article id="reading-01" class="blog-post expandable-post">
                 <div class="blog-header" onclick="togglePost('reading-01')">
                     <div class="blog-week">Reading 01</div>
                     <h2 class="blog-title">Cambridge: The Fifties and Sixties</h2>
                     <div class="blog-meta">
                         <span>📅 August 31, 2025</span>
-                        <span class="word-count">846 words</span>
+                        <span class="word-count">1087 words</span>
                         <span class="blog-reading">Hackers Part One</span>
                     </div>
                     <div class="expand-indicator">
@@ -1276,7 +1320,43 @@
                     </div>
                 </div>
                 <div class="blog-content collapsed" id="content-reading-01">
-                    <p>[Your existing Reading 01 content would go here]</p>
+                    <p>For my first blog, I'd like to start by making a comparison between the setting of the first book we are reading, <em>Hackers: Heroes of the Computer Revolution</em>, and the CSE student life at Notre Dame. Throughout reading, whenever the author mentioned Building 26 and the EAM room, I envisioned Fitzpatrick Hall of Engineering and the basement room B19, where CSE students, specifically CPEGS spend their late nights studying. The author mentioned hackers working <strong>"in the basement of this building void of personality, the EAM room."</strong> The author also writes, <strong>"where [Peter] would wonder the hallways at two o'clock in the morning […] he would discover a computer that he would play with."</strong> I am not sure about you, but those lines scream Fitzpatrick ("building void of personality"), B19 room ("in the basement" and "the EAM room"), and the hallways students walk through in the middle of the night ("wonder the hallways at two o'clock in the morning"). I am also wondering if Prof Bui loved this book so much because one of the main characters is also named Bui 🤔 But now that I have brought this book to reality and now that I have brought it to Notre Dame, it may be easier to reflect on.</p>
+
+                    <p>As I read through the chapters, I noticed that the early chapters, specifically the first chapter, set the stage to what being a hacker really means. It described the work Peter Samson did and the mindset that drove him. Through these descriptions and the rules of what it means to be a hacker, I have noted a couple of important takeaways.</p>
+
+                    <h3>The Hands-On Imperative</h3>
+
+                    <p>In the early chapters, the author writes, <strong>"Peter Samson and his friends had grown up with a specific relationship to the world, wherein things had meaning only if you found out how they worked. And how would you go about that if not by getting your hands on them?"</strong> This quote defines one of the main qualities of a hacker. It defines a hacker as someone who doesn't go about their day only experiencing it through a third-view point-of-view. Rather, a hacker goes about their day by digging deeper into the things around them. That act of digging deeper is what gave meaning to the world and the things they worked on. In our class discussion, we discussed how learning happens when there is a hands-on experience. However, I think our discussion lacked what things we like to get our hands to do the work on. While our conversation focused on a lot of computer specific experiences or projects we worked on, I feel that this quality of a hacker extends beyond computers.</p>
+
+                    <h3>Learning Beyond Grades</h3>
+
+                    <p>Additionally, in the early chapters, the author talks about the many obstacles to learning that already exist, and mentions that to Samson, <strong>the quest of hacking meant more than a degree and more than bothering with stupid things like teachers and grades.</strong> We touched on this during our class discussion and mentioned the difference between that and the way a Notre Dame student perceives their education. In part, I believe what differentiates Samson from many students, and not necessarily just Notre Dame students, is his drive to learn something new and to do something new. What set Samson apart from his peers is this careless-ness he had to his in-class education because he saw something greater, more rewarding and with greater output.</p>
+
+                    <p>Samson's attitude reminds me of a friend, who I will name H, from back home. He is enrolled in a university in Jordan where he studies software engineering. Since high school, H always made the coolest video games and music. At university, he continues to do the same and is now entering competitions and winning. In both high school and university, H never had a drive to perform well in class; however, when you look at what he does outside of the classroom, you'd be surprised by the things he develops.</p>
+
+                    <h3>The Pressure of Academic Achievement</h3>
+
+                    <p>Additionally, in class, professor Bui asked us why we aren't the same… why we aren't careless and do what we want not for a grade but for the purpose of being hackers. This had me reflect on my school life and experiences. Looking at the household I grew up in, education and getting a degree is one of the most important aspects in life (besides family and health). And with this comes the chase of grades and a high GPA. So, in a sense, there isn't much of freedom when it comes to chasing a hack but rather the must to chase a grade. Outside of school however, there is a chance to become a true hacker, whether that is through a sport or other creative outlets. But from a young age, I have always been interested in martial arts, being a taekwondo player for almost 14 years and then becoming a boxer during university. Apart from sports, I love performing magic tricks and learning cool card tricks, which I think is my biggest hack.</p>
+
+                    <h3>Born or Made?</h3>
+
+                    <p>Although there are many more things I would like to talk about, I would like to end with a comment on something the author said about whether hackers are born or made. In my opinion, <strong>everyone is born to be a hacker in something.</strong> It is a matter of exploring the many fields until finding that passion that one is born to hack in. However, if one doesn't explore enough, they won't find their passion and will end up stuck in something they like just enough that they need to make themselves great hackers at.</p>
+
+                    <p>To end this blog, I'd like to say that the choice of chinese food for the hackers is a very good choice and wonder if Taco Bell could be the present equivalent today.</p>
+
+                    <div class="blog-tags">
+                        <h4>Topics:</h4>
+                        <div class="tag-list">
+                            <span class="tag">MIT Hackers</span>
+                            <span class="tag">Peter Samson</span>
+                            <span class="tag">Hands-On Imperative</span>
+                            <span class="tag">Academic Culture</span>
+                            <span class="tag">Notre Dame</span>
+                            <span class="tag">Learning Philosophy</span>
+                            <span class="tag">Martial Arts</span>
+                            <span class="tag">Born vs Made</span>
+                        </div>
+                    </div>
                 </div>
             </article>
 
